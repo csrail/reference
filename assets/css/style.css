@@ -1,3 +1,7 @@
 body {
     background-color: #fafafa
 }
+
+.rouge-gutter {
+    width: 0px;
+}

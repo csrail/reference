@@ -4,28 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>html</title>
-    <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="stylesheet" href="/assets/css/style.css">
-<!--    <link rel="stylesheet" href="minimum.css">-->
-<!--    <script src="script.js" defer></script>-->
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+<!--    <link rel="stylesheet" href="./assets/css/minimum.css">-->
+<!--    <script src="./assets/js/script.js" defer></script>-->
 
 </head>
 <body>
   <nav>
-  <a href="/">home</a>
-  <a href="/html">html</a>
-  <a href="/css">css</a>
-  <a href="/js">js</a>
-  <a href="/programming">programming</a>
-  <a href="/espirit_de_corps">espirit de corps</a>
+  <a href="./">home</a>
+  <a href="./html">html</a>
+  <a href="./css">css</a>
+  <a href="./js">js</a>
+  <a href="./programming">programming</a>
+  <a href="./espirit_de_corps">espirit de corps</a>
 </nav>
 
   <h1>html</h1>
   <h2 id="using-async-and-defer-in-the-script-tag-when-loading-javascript-file">Using async and defer in the script tag when loading javascript file</h2>
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"script.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"script.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"script.js"</span> <span class="na">defer</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"script.js"</span> <span class="na">async</span><span class="nt">&gt;&lt;/script&gt;</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">no option</code> html loading pauses while js script is fetched; when the js file is fetched it’s executed, then the html file unpauses and continues loading.</li>
