@@ -17,12 +17,129 @@
   <a href="./css">css</a>
   <a href="./js">js</a>
   <a href="./programming">programming</a>
+  <a href="./sys_admin">sys admin</a>
   <a href="./espirit_de_corps">espirit de corps</a>
 </nav>
 
-  <h1>js</h1>
-  <h2 id="understanding-bind">Understanding .bind</h2>
+  <h1 id="patterns">Patterns</h1>
+<ul>
+  <li>rest parameter syntax</li>
+  <li>rest property syntax</li>
+  <li>spread syntax</li>
+  <li>destructuring assignment</li>
+</ul>
 
+<p>Readings:
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters">rest parameters</a>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#rest_property">rest property syntax</a>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax">spread syntax</a>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">destructuring assignment</a></p>
+
+<h1 id="functions">Functions</h1>
+<p>To define function scope… let <strong>aFunction</strong> exist:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="c1">// global scope "space"</span>
+
+<span class="kd">function</span> <span class="nf">aFunction</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// function body "space" of aFunction</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">aFunction</code>’s function scope is equivalent to the function body “space”.  We may define this scope as <code class="language-plaintext highlighter-rouge">s</code>.</li>
+  <li>The scope which <code class="language-plaintext highlighter-rouge">aFunction</code> exists is the global scope “space”.  We may define this scope as <code class="language-plaintext highlighter-rouge">s-1</code>, where <code class="language-plaintext highlighter-rouge">-1</code> means outer or “surfacing” by 1 unit.</li>
+  <li><code class="language-plaintext highlighter-rouge">aFunction</code> can access variables in the <code class="language-plaintext highlighter-rouge">s</code> space.</li>
+  <li><code class="language-plaintext highlighter-rouge">aFunction</code> can access variables in the <code class="language-plaintext highlighter-rouge">s-1</code> space.</li>
+</ul>
+
+<hr />
+
+<p>To define function scope… let <strong>aFunction</strong> and <strong>bFunction</strong> exist:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="c1">// global scope "space"</span>
+
+<span class="kd">function</span> <span class="nf">aFunction</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// function body "space" of aFunction</span>
+    <span class="kd">function</span> <span class="nf">bFunction</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// function body "space" of bFunction</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Proposition:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">aFunction</code>’s function scope is equivalent to function body “space” of <code class="language-plaintext highlighter-rouge">aFunction</code>.  We define this scope as <code class="language-plaintext highlighter-rouge">s</code></li>
+  <li>In the context of <code class="language-plaintext highlighter-rouge">aFunction</code>, the global scope “space” is <code class="language-plaintext highlighter-rouge">s-1</code>.</li>
+  <li>In the context of <code class="language-plaintext highlighter-rouge">aFunction</code>, the function body “space” of <code class="language-plaintext highlighter-rouge">bFunction</code> is <code class="language-plaintext highlighter-rouge">s+1</code>, where <code class="language-plaintext highlighter-rouge">+1</code> means inner or “deeper” by 1 unit.</li>
+  <li><code class="language-plaintext highlighter-rouge">aFunction</code> can access variables in the<code class="language-plaintext highlighter-rouge">s</code> and <code class="language-plaintext highlighter-rouge">s-1</code> space.</li>
+  <li><code class="language-plaintext highlighter-rouge">aFunction</code> cannot access variables in the <code class="language-plaintext highlighter-rouge">s+1</code> space.</li>
+</ul>
+
+<p>Contrast:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">bFunction</code>’s function scope is equivalent to function body “space” of <code class="language-plaintext highlighter-rouge">bFunction</code>.  We may define this scope as <code class="language-plaintext highlighter-rouge">s</code>.</li>
+  <li>In the context of <code class="language-plaintext highlighter-rouge">bFunction</code>, <code class="language-plaintext highlighter-rouge">aFunction</code>’s scope is <code class="language-plaintext highlighter-rouge">s-1</code>.</li>
+  <li>In the context of <code class="language-plaintext highlighter-rouge">bFunction</code>, the global scope is <code class="language-plaintext highlighter-rouge">s-1 -1</code>, or <code class="language-plaintext highlighter-rouge">s-2</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">bFunction</code> can access variables in the <code class="language-plaintext highlighter-rouge">s-1</code> and <code class="language-plaintext highlighter-rouge">s-2</code> space.</li>
+</ul>
+
+<p>Terms:</p>
+<ul>
+  <li>In the context of a function’s scope being <code class="language-plaintext highlighter-rouge">s</code>, the function may access variables in the <code class="language-plaintext highlighter-rouge">s</code> or <code class="language-plaintext highlighter-rouge">s-1</code> or <code class="language-plaintext highlighter-rouge">s-n</code> scope, where <code class="language-plaintext highlighter-rouge">n</code> is an integer.</li>
+  <li>However, the function cannot access variables in any <code class="language-plaintext highlighter-rouge">s+1</code> or <code class="language-plaintext highlighter-rouge">s+n</code> scopes.</li>
+  <li><code class="language-plaintext highlighter-rouge">aFunction</code>’s inability to access variables in the <code class="language-plaintext highlighter-rouge">bFunction</code> scope, while <code class="language-plaintext highlighter-rouge">bFunction</code> is able to access variables in the <code class="language-plaintext highlighter-rouge">aFunction</code> scope is the basis of a closure.</li>
+  <li>Note: if variables are named the same in multiple scopes, then the function will first look for the variable at the scope closest to <code class="language-plaintext highlighter-rouge">s</code> before moving to <code class="language-plaintext highlighter-rouge">s-n</code></li>
+</ul>
+
+<p>Readings:</p>
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions#nested_functions_and_closures">nested functions and closures</a></li>
+</ul>
+
+<h1 id="functions-1">Functions</h1>
+<ul>
+  <li>define functions either as a function declaration or function expression</li>
+  <li>passing different data types as arguments into functions: strings, numbers, arrays, objects, functions</li>
+  <li>function expression use case: named function expression (“I’ll keep this one for later”)</li>
+  <li>function expression use case: anonymous function (“function on the fly, forever unknown”)</li>
+  <li>function expression use case: immediate invocation (“ka-me-ha-meee-HA!”, immediately invoked function expression)</li>
+  <li>shorthand function expressions: arrow syntax (“gotta go fast, haha chilli dogs”)</li>
+  <li>shorthand arrow function expressions behave differently to long-form function expressions</li>
+  <li>callback functions</li>
+  <li>conditional function declaration based on if statement and function expression</li>
+  <li>methods are functions that belong to an object</li>
+  <li>program execution sequence: function definition -&gt; function call -&gt; function execution</li>
+  <li>a call must be in the same scope as the function to succeed</li>
+  <li>function hoisting, thesis: the call to a function may be evaluated before its function declaration</li>
+  <li>function hoisting, contrast: function expressions must always be evaluated first before a call is made</li>
+  <li>when a function is called, arguments are passed</li>
+  <li>when a function is declared or expressed, parameters are defined</li>
+</ul>
+
+<p>Readings:</p>
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions">functions (guide)</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions">functions (reference)</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function declaration</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function">function expression</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions">shorthand function expressions</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Glossary/Callback_function">callback functions</a></li>
+</ul>
+
+<h1 id="understanding-bind">Understanding .bind</h1>
 <ul>
   <li>The below code block demonstrates how <code class="language-plaintext highlighter-rouge">this</code> changes inside a constructor function of a <strong>class</strong> and a <strong>callback function</strong>.</li>
   <li>The statement on line 15 will affect how line 20 is parsed.</li>

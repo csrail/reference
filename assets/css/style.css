@@ -2,6 +2,30 @@ body {
     background-color: #fafafa
 }
 
+p {
+    margin: 10px 0 0 0;
+}
+
+ul {
+    margin: 0 0 10px 0;
+}
+
+div.highlight {
+    padding: 0;
+}
+
+pre.highlight {
+    padding: 0;
+}
+
+code {
+    padding: 0;
+}
+
+.rouge-table {
+    margin: 0;
+}
+
 .rouge-gutter {
     width: 0px;
 }
