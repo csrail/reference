@@ -22,19 +22,96 @@
   <a href="./espirit_de_corps">espirit de corps</a>
 </nav>
 
-  <h1 id="patterns">Patterns</h1>
+  <h1 id="variables">Variables</h1>
 <ul>
-  <li>rest parameter syntax</li>
-  <li>rest property syntax</li>
-  <li>spread syntax</li>
-  <li>destructuring assignment</li>
+  <li><code class="language-plaintext highlighter-rouge">var</code></li>
+  <li><code class="language-plaintext highlighter-rouge">let</code></li>
+  <li><code class="language-plaintext highlighter-rouge">const</code></li>
+  <li><code class="language-plaintext highlighter-rouge">"use strict"</code></li>
 </ul>
 
-<p>Readings:
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters">rest parameters</a>
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#rest_property">rest property syntax</a>
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax">spread syntax</a>
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">destructuring assignment</a></p>
+<p>The use case for a variable can be understood when an expression is evaluated.  Expressions return a result when they are evaluated.  If the result is not stored, it is discarded.  Therefore, variables are used to store the result for later use.</p>
+
+<p>Variables are declared and initialised.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="kd">let</span> <span class="nx">a</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<ul>
+  <li>The variable <strong>a</strong> is declared but not initialised.  Calling <strong>a</strong> returns <code class="language-plaintext highlighter-rouge">undefined</code>.</li>
+  <li>The variable <strong>b</strong> is declared and initialised with a value of 10.  Calling <strong>b</strong> returns <code class="language-plaintext highlighter-rouge">10</code>.</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">var</code> should be deprecated as <code class="language-plaintext highlighter-rouge">let</code> and <code class="language-plaintext highlighter-rouge">const</code> supersede its use case.  <code class="language-plaintext highlighter-rouge">var</code> is not block scoped, meaning that it can be accessed outside the block it is declared in.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="k">if </span><span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span> <span class="c1">// x is 5</span>
+
+<span class="k">if </span><span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span> <span class="c1">//  ReferenceError: y is not defined</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">let</code> is block scoped.  The variable can be declared without being initialised.  The variable is ‘dynamically-typed’ meaning that the data type doesn’t need to be specified upon declaration. <code class="language-plaintext highlighter-rouge">let</code> allows for reassignment.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="kd">let</span> <span class="nx">a</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="nx">c</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span> <span class="c1">// reassignment</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">const</code> is block scoped.  The variable must be declared and initialised as <code class="language-plaintext highlighter-rouge">const</code> does not allow for reassignment.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">a</span><span class="p">;</span> <span class="c1">// SyntaxError: Missing initialiser in const declaration</span>
+<span class="kd">const</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="nx">b</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span> <span class="c1">// TypeError: Assignment to constant variable</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">const</code> cannot be redeclared but can be mutated.</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nf">push</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span> <span class="c1">// [1, 2]</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">'use strict'</code> prevents variables from being declared in your IDE without the keywords <code class="language-plaintext highlighter-rouge">let</code> and <code class="language-plaintext highlighter-rouge">const</code>.  This means that variables can’t accidentally be declared in the global scope</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="dl">'</span><span class="s1">use strict</span><span class="dl">'</span><span class="p">;</span>
+<span class="nx">words</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">the quick brown fox</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// IDE complains about the implicit declaration of words</span>
+<span class="kd">let</span> <span class="nx">sentence</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">over the lazy dog</span><span class="dl">"</span><span class="p">;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Readings</p>
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#declarations">variable declarations</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode">strict mode</a></li>
+</ul>
 
 <h1 id="functions">Functions</h1>
 <p>To define function scope… let <strong>aFunction</strong> exist:</p>
@@ -107,6 +184,7 @@
 
 <p>Readings:</p>
 <ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions#function_scope">function scope</a></li>
   <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions#nested_functions_and_closures">nested functions and closures</a></li>
 </ul>
 

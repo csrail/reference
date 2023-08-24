@@ -4,6 +4,73 @@ title: js
 ---
 
 
+# Variables
+- `var`
+- `let`
+- `const`
+- `"use strict"`
+
+The use case for a variable can be understood when an expression is evaluated.  Expressions return a result when they are evaluated.  If the result is not stored, it is discarded.  Therefore, variables are used to store the result for later use.
+
+Variables are declared and initialised.
+
+```js
+let a;
+let b = 10;
+```
+
+- The variable __a__ is declared but not initialised.  Calling __a__ returns `undefined`.
+- The variable __b__ is declared and initialised with a value of 10.  Calling __b__ returns `10`.
+
+`var` should be deprecated as `let` and `const` supersede its use case.  `var` is not block scoped, meaning that it can be accessed outside the block it is declared in.
+
+```js
+if (true) {
+  var x = 5;
+}
+console.log(x); // x is 5
+
+if (true) {
+  let y = 5;
+}
+console.log(y); //  ReferenceError: y is not defined
+```
+
+`let` is block scoped.  The variable can be declared without being initialised.  The variable is 'dynamically-typed' meaning that the data type doesn't need to be specified upon declaration. `let` allows for reassignment.
+
+```js
+let a;
+let b = 10;
+c = 20; // reassignment
+```
+
+`const` is block scoped.  The variable must be declared and initialised as `const` does not allow for reassignment.
+
+```js
+const a; // SyntaxError: Missing initialiser in const declaration
+const b = 10;
+b = 20; // TypeError: Assignment to constant variable
+```
+
+`const` cannot be redeclared but can be mutated.
+```js
+const arr = [];
+arr.push(1);
+arr.push(2);
+console.log(arr); // [1, 2]
+```
+
+`'use strict'` prevents variables from being declared in your IDE without the keywords `let` and `const`.  This means that variables can't accidentally be declared in the global scope
+```js
+'use strict';
+words = "the quick brown fox"; // IDE complains about the implicit declaration of words
+let sentence = "over the lazy dog";
+```
+
+Readings
+- [variable declarations](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#declarations)
+- [strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode)
+
 # Functions
 To define function scope... let __aFunction__ exist:
 
@@ -56,6 +123,7 @@ Terms:
 - Note: if variables are named the same in multiple scopes, then the function will first look for the variable at the scope closest to `s` before moving to `s-n`
 
 Readings:
+- [function scope](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions#function_scope)
 - [nested functions and closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions#nested_functions_and_closures)
 
 # Functions
