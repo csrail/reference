@@ -3,7 +3,6 @@ layout: default
 title: js
 ---
 
-
 # Variables
 - `var`
 - `let`

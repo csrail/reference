@@ -22,9 +22,116 @@
   <a href="./espirit_de_corps">espirit de corps</a>
 </nav>
 
-  <p>##</p>
+  <h1 id="npm-webpack">npm, Webpack</h1>
+
+<p>The <code class="language-plaintext highlighter-rouge">npm init</code> command initialises a new project in the current folder, in other words, this folder is now the root directory of the project.  A <strong>package.json</strong> file is created in this space which functions as a config file for the project during development builds and in production builds.</p>
+
+<p>Within the <code class="language-plaintext highlighter-rouge">scripts</code> node, you can specify special keywords to use in the command <code class="language-plaintext highlighter-rouge">npm run keyword</code>.  T: Is it possible to run <code class="language-plaintext highlighter-rouge">webpack --watch</code> outside of <code class="language-plaintext highlighter-rouge">npm run watch</code>?</p>
+
+<p>There are also specifications for dependencies in the developer environment <code class="language-plaintext highlighter-rouge">devDevependencies</code>, and in the production environment <code class="language-plaintext highlighter-rouge">Dependencies</code> nodes.  When running <code class="language-plaintext highlighter-rouge">npm install &lt;package&gt; --save-dev</code>, this adds an entry to the <code class="language-plaintext highlighter-rouge">devDependencies</code>; while <code class="language-plaintext highlighter-rouge">npm install &lt;package&gt; --save</code> adds an entry into <code class="language-plaintext highlighter-rouge">Dependencies</code>.  Packages are locally installed, and can be inspected, in the <strong>node_modules</strong> folder.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="rouge-code"><pre><span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"restaurant"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"main"</span><span class="p">:</span><span class="w"> </span><span class="s2">"index.js"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"watch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webpack --watch"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"echo </span><span class="se">\"</span><span class="s2">Error: no test specified</span><span class="se">\"</span><span class="s2"> &amp;&amp; exit 1"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"license"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ISC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"devDependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"webpack"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^5.88.2"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"webpack-cli"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^5.1.4"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Webpack, <em>the bundler of all web assets</em>.  Webpack will take multiple files, process them and output them into files, of fewer numer and smaller size, for application consumption.  Webpack must interact with multiple file types but natively only reads javascript and json, so separate <strong>loaders</strong> are specified to process the different file types — this is represented under the <code class="language-plaintext highlighter-rouge">module</code> node.</p>
+
+<p>Initial configuration of webpack.config.js handles the <code class="language-plaintext highlighter-rouge">entry</code> and <code class="language-plaintext highlighter-rouge">output</code>.  The <code class="language-plaintext highlighter-rouge">entry</code> node specifies the source files that are fed into webpack for processing.  While <code class="language-plaintext highlighter-rouge">output</code> specifies the destination file that webpack produces for distribution.  This is implicitly stated via the <code class="language-plaintext highlighter-rouge">src</code> and <code class="language-plaintext highlighter-rouge">dist</code> folders respectively.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">devtool</code> node specifies the type of source mapping available.  Post-processing, the initial source code is transcompiled by webpack into the a different kind of source, one that begets performance at the cost of readability.  Source mapping relates the two source codes, with increased readability in the source map increasing build times.  Hence, the <code class="language-plaintext highlighter-rouge">devtool</code> node wil take many different values each with their different tradeoffs on build performance and the corresponding source map readability.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">watch</code> node of webpack.config.js in conjunction the <code class="language-plaintext highlighter-rouge">"scripts": "watch":</code> node in package.json allows you to run <code class="language-plaintext highlighter-rouge">npm run watch</code>.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">clean</code> node can help remove un-needed files in a project following a build, but this must be configured further to avoid stale, but absolutely necessary` files from being cleaned up.  Oopsies!</p>
+
+<p>Loaders are specified in the <code class="language-plaintext highlighter-rouge">module</code> -&gt; <code class="language-plaintext highlighter-rouge">rules</code> node.  Each rule has a <code class="language-plaintext highlighter-rouge">test</code> node and a <code class="language-plaintext highlighter-rouge">use</code> node.  The <code class="language-plaintext highlighter-rouge">test</code> looks for files described via regular expression, and processes them in the loaders specified under <code class="language-plaintext highlighter-rouge">use</code>.  Multiple loaders can be used to process the files in a sequence.</p>
+
+<p>By using the <code class="language-plaintext highlighter-rouge">plugins</code> node, webpack’s capabilities can be extended further.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre><span class="c1">// webpack.config.js</span>
+<span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">entry</span><span class="p">:</span> <span class="dl">'</span><span class="s1">./src/index.js</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">output</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">filename</span><span class="p">:</span> <span class="dl">'</span><span class="s1">main.js</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">path</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nf">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">dist</span><span class="dl">'</span><span class="p">),</span>
+        <span class="c1">// clean: true,</span>
+    <span class="p">},</span>
+    <span class="na">devtool</span><span class="p">:</span> <span class="dl">'</span><span class="s1">eval</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">watch</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="p">};</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Readings:</p>
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">Ctrl + Shift + 7</code>, navigate files in pycharm.</li>
+  <li><a href="https://nodesource.com/blog/an-absolute-beginners-guide-to-using-npm/">npm init</a></li>
+  <li><a href="https://webpack.js.org/concepts/">webpack concepts</a></li>
+  <li><a href="https://webpack.js.org/configuration/devtool/">webpack devtool</a></li>
+  <li><a href="https://webpack.js.org/guides/development/">webpack guide: development, webpack watch</a></li>
+</ul>
+
+<h1 id="vim">Vim</h1>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">cs</code>, change surrounding quotes or brackets
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">cs([</code></li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">ci</code>, change inner contents of quotes or brackets
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">ci"</code></li>
+      <li><code class="language-plaintext highlighter-rouge">ci(</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="pycharm">Pycharm</h1>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Ctrl + Shift + n</code>, navigate files in your directory tree with keypresses.</li>
 </ul>
 
 </body>
