@@ -2,6 +2,32 @@
 layout: default
 title: js
 ---
+# Functions
+Essay Topic: "Thinking in patterns, forests not trees" --- compare and contrast objects produced with __classes__ and objects produced by __factory functions__.
+
+Using a high-level programming language, we can logically move from completing operations with primitive operands towards communication between different objects.  This essay attempts to clarify and bridge this gap between these two seemingly unrelated patterns.
+
+Completing simple operations is usually straight-forward, returning a result with low or no side effects: a __simple construct__.  Consider the statement `a + b = c` which we would write manually from left to right in sequence. The operation `a + b`, (with operands _a_ and _b_, and the _+_ operator) is executed `=`, returns a result `c`, with no side effects.  In a program, the execution is done at runtime, so the script would be simply written as `a + b`, the program is run which is equivalent to `=`, and the program returns the result `c`.  As implicitly instructed, the program immediately discards the result.
+
+Variables solve this futile expenditure by allowing the program to store the result in memory for the duration that the program is running.  Variable declarations are interesting because they improve upon the simple construct mentioned prior to provide new capacities.  Variable declarations themselves, like `d = c`, are operations with operands, operators and a side effect.  The statement `d = c` _is_ the operation (and this expression cannot be reduced any further without affecting what the statement states, for `d` alone is not an operation, neither is `=` alone, etc.)  The assignment `=` operator works on the operands `d` and `c`, where `d` is a reference and `c` is a value.  (The word 'reference' is used here in place of 'symbol' since the entire expression is already using three symbols `d`, `=`, and `c`; using 'symbol' would confuse rather than clarify.)  Once the assignment is made, calling `d` reproduces the value of `c`, with what we know of `c` already being discarded.
+
+There are now two patterns we know of: the simple operation construct, and variable declarations, which is an extension of the simple operation construct.  Instead of moving towards variables, we can extend the simple operation construct towards a different direction, a __function__.
+
+A function `f(x, y) {...}` extends a simple operation by creating a reference to it.  The reference is an enabler of different degrees.  The first advantage conferred, is that the reference defines the operation once, allowing the reference to be called or invoked `n` times to run the operation `n` times.  The second advantage conferred, is that the reference only knows to operate on the operands `x` and `y`, more specifically, a reference to `x` and `y` parameters, not the values of `x` and `y`; the function is agnostic to its input arguments.  The third advantage conferred is that the reference can be stated without being invoked, of which its use case will contribute later to more complex constructs in the form of a callback.
+
+```js
+// function declaration
+// f is a reference to return x + y
+function f(x, y) {
+    return x + y
+}
+
+// function stated
+f;
+
+// function invoked
+f();
+```
 
 # Variables
 - `var`

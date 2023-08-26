@@ -22,7 +22,44 @@
   <a href="./espirit_de_corps">espirit de corps</a>
 </nav>
 
-  <h1 id="variables">Variables</h1>
+  <h1 id="functions">Functions</h1>
+<p>Essay Topic: “Thinking in patterns, forests not trees” — compare and contrast objects produced with <strong>classes</strong> and objects produced by <strong>factory functions</strong>.</p>
+
+<p>Using a high-level programming language, we can logically move from completing operations with primitive operands towards communication between different objects.  This essay attempts to clarify and bridge this gap between these two seemingly unrelated patterns.</p>
+
+<p>Completing simple operations is usually straight-forward, returning a result with low or no side effects: a <strong>simple construct</strong>.  Consider the statement <code class="language-plaintext highlighter-rouge">a + b = c</code> which we would write manually from left to right in sequence. The operation <code class="language-plaintext highlighter-rouge">a + b</code>, (with operands <em>a</em> and <em>b</em>, and the <em>+</em> operator) is executed <code class="language-plaintext highlighter-rouge">=</code>, returns a result <code class="language-plaintext highlighter-rouge">c</code>, with no side effects.  In a program, the execution is done at runtime, so the script would be simply written as <code class="language-plaintext highlighter-rouge">a + b</code>, the program is run which is equivalent to <code class="language-plaintext highlighter-rouge">=</code>, and the program returns the result <code class="language-plaintext highlighter-rouge">c</code>.  As implicitly instructed, the program immediately discards the result.</p>
+
+<p>Variables solve this futile expenditure by allowing the program to store the result in memory for the duration that the program is running.  Variable declarations are interesting because they improve upon the simple construct mentioned prior to provide new capacities.  Variable declarations themselves, like <code class="language-plaintext highlighter-rouge">d = c</code>, are operations with operands, operators and a side effect.  The statement <code class="language-plaintext highlighter-rouge">d = c</code> <em>is</em> the operation (and this expression cannot be reduced any further without affecting what the statement states, for <code class="language-plaintext highlighter-rouge">d</code> alone is not an operation, neither is <code class="language-plaintext highlighter-rouge">=</code> alone, etc.)  The assignment <code class="language-plaintext highlighter-rouge">=</code> operator works on the operands <code class="language-plaintext highlighter-rouge">d</code> and <code class="language-plaintext highlighter-rouge">c</code>, where <code class="language-plaintext highlighter-rouge">d</code> is a reference and <code class="language-plaintext highlighter-rouge">c</code> is a value.  (The word ‘reference’ is used here in place of ‘symbol’ since the entire expression is already using three symbols <code class="language-plaintext highlighter-rouge">d</code>, <code class="language-plaintext highlighter-rouge">=</code>, and <code class="language-plaintext highlighter-rouge">c</code>; using ‘symbol’ would confuse rather than clarify.)  Once the assignment is made, calling <code class="language-plaintext highlighter-rouge">d</code> reproduces the value of <code class="language-plaintext highlighter-rouge">c</code>, with what we know of <code class="language-plaintext highlighter-rouge">c</code> already being discarded.</p>
+
+<p>There are now two patterns we know of: the simple operation construct, and variable declarations, which is an extension of the simple operation construct.  Instead of moving towards variables, we can extend the simple operation construct towards a different direction, a <strong>function</strong>.</p>
+
+<p>A function <code class="language-plaintext highlighter-rouge">f(x, y) {...}</code> extends a simple operation by creating a reference to it.  The reference is an enabler of different degrees.  The first advantage conferred, is that the reference defines the operation once, allowing the reference to be called or invoked <code class="language-plaintext highlighter-rouge">n</code> times to run the operation <code class="language-plaintext highlighter-rouge">n</code> times.  The second advantage conferred, is that the reference only knows to operate on the operands <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code>, more specifically, a reference to <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code> parameters, not the values of <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code>; the function is agnostic to its input arguments.  The third advantage conferred is that the reference can be stated without being invoked, of which its use case will contribute later to more complex constructs in the form of a callback.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="c1">// function declaration</span>
+<span class="c1">// f is a reference to return x + y</span>
+<span class="kd">function</span> <span class="nf">f</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span>
+<span class="p">}</span>
+
+<span class="c1">// function stated</span>
+<span class="nx">f</span><span class="p">;</span>
+
+<span class="c1">// function invoked</span>
+<span class="nf">f</span><span class="p">();</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h1 id="variables">Variables</h1>
 <ul>
   <li><code class="language-plaintext highlighter-rouge">var</code></li>
   <li><code class="language-plaintext highlighter-rouge">let</code></li>
@@ -113,7 +150,7 @@
   <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode">strict mode</a></li>
 </ul>
 
-<h1 id="functions">Functions</h1>
+<h1 id="functions-1">Functions</h1>
 <p>To define function scope… let <strong>aFunction</strong> exist:</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
@@ -188,7 +225,7 @@
   <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions#nested_functions_and_closures">nested functions and closures</a></li>
 </ul>
 
-<h1 id="functions-1">Functions</h1>
+<h1 id="functions-2">Functions</h1>
 <ul>
   <li>define functions either as a function declaration or function expression</li>
   <li>passing different data types as arguments into functions: strings, numbers, arrays, objects, functions</li>
