@@ -56,7 +56,7 @@ module.exports = {
         // clean: true,
     },
     devtool: 'eval',
-    watch: true,
+    watch: true- `F4`, jumps to target's source.  For javascript the source is the returned function for public use from a factory function.  Pycharm seems unable to go a step further and look for the named function expression the symbol belongs to.,
 };
 ```
 
@@ -75,3 +75,6 @@ Readings:
 
 # Pycharm
 - `Ctrl + Shift + n`, navigate files in your directory tree with keypresses.
+- `Shift + Alt + 7`, finds the target's usages in all places.  A comprehensive lookup which addresses the shortcomings of `F4`
+- `F4`, jumps to target's source.  For javascript the source is the returned function for public use from a factory function.  Pycharm seems unable to go a step further and look for the named function expression the symbol belongs to.
+- `Ctrl+B`, go to delcaration or usages.
