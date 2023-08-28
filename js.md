@@ -2,6 +2,93 @@
 layout: default
 title: js
 ---
+# Destructuring Assignment
+Essay Topic: "Select what you need, discard the rest" --- compare and contrast the assignment operator '=' to the destructuring assignment expression, with emphasis on the differences between array destructuring and object destructuring
+
+Assignment operations allow programs to remember values through symbols.  Simple assignment operations interact with primitive data types and simple data structures, while more complicated assignment operations interact with objects.  Laconically, `a` is 123, and `b` is "word".  This description is brief and is useful when running a calculation, but the brevity does violence in understanding how a program achieves that directness of the symbols `a` being 123 and `b` being "word".
+
+When 123 is assigned to the variable `a`, `a` now references the __number__ 123.  When "word" is assigned to the variable `b`, `b` now references the __string__ "word".  Both the number and string are __primitive data types,__ "primitive" because they are the simplest expression available (not an object, has no methods and no properties) and "data type" because machines have to model binary code into something graspable for humans to work with and relate to.  When `a` or `b` are called, the expression they reference is evaluated and a vale returned.  Evaluating the expression 123 returns the value 123, evaluating the expression "word" returns the value "word".  This distinction isn't particularly worthwhile when the expression only consists of primitive data types, but when the expression becomes larger, stating something more verbose and comprehensive, the distinction becomes useful.  That "something" could be, listed in increasing complexity order, a data structure, a function, or an object.
+
+```js
+const a = 123
+const b = "word"
+```
+
+The below code block demonstrates how an expression on the right-hand-side of the assignment operator is first evaluated, a value returned and then assigned to a variable on the left-hand-side of the assignment operator.
+
+```js
+const c = []
+const d = [4, 5, 6]
+
+const i = {}
+const j = {w: "w-descriptor"}
+const k = {x: () => {return "x-descriptor"}}
+```
+
+Following evaluation, calls can be made to the variables.  `c` returns an array object, and `d` returns an array object which contains a sequence of numbers.  `i` returns an object literal; `j` returns an object literal which contains a property `w`; `j.w` returns the string "w-descriptor"; `k` returns an object literal which contains a property `x`; `k.x` returns an anonymous function declaration bound to the `x` property; `k.x()` returns the string "x-descriptor".
+
+Put another way, `c` is a symbol that represents an array object and `d` is a symbol that represents an array object containing a sequence of numbers.  `i` is a symbol for an object literal; `j` is a symbol for an object literal which contains a `w` property; `w` is a symbol for the string "w-descriptor"; `k` is a symbol for an object literal which contains the `x` property; `k.x` is a symbol for an anonymous function declaration; `k.x()` is a symbol for "x-descriptor".
+
+So far, the left-hand-side of the equation only consists of one symbol.  But when there are two or more symbols on the left-hand-side, the statement changes from a _simple assignment_ to a _destructuring assignment_.  A destructuring assignment tries to map values on the right-hand-side of the assignment operator to symbols on the left-hand-side of the assignment operator.
+
+```js
+const [e, f] = [7, 8]
+const [g, h] = [9,]
+```
+
+In array destructuring assignments, the assignment is based on the number of elements available and their positions.  If the left-hand-side contains the same number of elements as the right-hand-side, then all left-hand-side symbols will return a value: `e` returns 7 and `f` returns 8.  Whereas if the left-hand-side contains a fewer number of elements than the right-hand-side, then only the first elements in the left-hand-side will be assigned a value, the latter elements will be assigned 'undefined', so `g` returns 9, and `h` returns 'undefined'.  In the example of `const [e, f]`, if `[7, 8]` were represented by a symbol `gg` then the values can still be distributed.
+
+```js
+const gg = [7, 8]
+const [e, f] = gg
+```
+
+Array destructuring can be expressed in these terms: `const [a_0, a_1, a_n] = [b_0, b_1, b_n]`, where `a` is a symbol, `b` is a value, and the numbers `0`, `1` and `n` represent the positions of related symbols and values.
+
+In object destructuring assignments, instead of assignment based on position, assignment is based on shared symbols. The `l` symbol will return a function; the `l()` symbol will return "l-descriptor"; `m` will return 'undefined'; `m()` will return a TypeError as 'undefined' is not a function and cannot be invoked; `r`, and what it represents, is discarded.
+
+```js
+const {l, m} = {l: () => {"l-descriptor"}, r: () => {"r-descriptor"}}
+```
+
+The use case of object destructuring becomes relevant during factory functions when they return object literals.  The returned object literal contain symbols to inner parts of a factory function normally inaccessible to an outer scope by a way of closure.  The object literal returned is then included in another factory function to pass along other symbols:
+
+```js
+const Dialogue = () => {
+    const speak = () => {}
+    const think = () => {}
+    const emote = () => {}
+    
+    return { speak, think, emote } // object literal returned when Dialogue is invoked
+}
+
+const Character = () => {
+    const { speak, think, emote } = Dialogue() // Dialogue is invoked
+    // speak, think, and emote are available to Character.
+}
+
+const InnerPersona = () => {
+    const { think } = Dialogue()
+    // think is available to InnerPersona, but not speak or emote.
+}
+```
+
+The `Dialogue` factory function has three named function expressions `speak`, `think` and `emote` from which the `Character` factory function can use via destructuring assignment.
+
+
+Readings
+- [assignment operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#assignment_operators)
+- [primitives](https://developer.mozilla.org/en-US/docs/Glossary/Primitive)
+- [objects](https://developer.mozilla.org/en-US/docs/Glossary/Object)
+- [object literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#object_literals)
+- [assignment to properties](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#assigning_to_properties)
+- [destructuring assignment (primer)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#destructuring)
+- [destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
+- [array destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#array_destructuring)
+- [object destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#object_destructuring)
+- [property accessors](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors)
+
+
 # Functions
 Essay Topic: "Thinking in patterns, forests not trees" --- compare and contrast objects produced with __classes__ and objects produced by __factory functions__.
 

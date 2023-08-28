@@ -20,9 +20,123 @@
   <a href="./ide">ide</a>
   <a href="./sys_admin">sys admin</a>
   <a href="./espirit_de_corps">espirit de corps</a>
+  <a href="./polis">πόλις</a>
+  <a href="./oikos">οίκος</a>
+  <a href="./glossa">γλώσσα</a>
 </nav>
 
-  <h1 id="functions">Functions</h1>
+  <h1 id="destructuring-assignment">Destructuring Assignment</h1>
+<p>Essay Topic: “Select what you need, discard the rest” — compare and contrast the assignment operator ‘=’ to the destructuring assignment expression, with emphasis on the differences between array destructuring and object destructuring</p>
+
+<p>Assignment operations allow programs to remember values through symbols.  Simple assignment operations interact with primitive data types and simple data structures, while more complicated assignment operations interact with objects.  Laconically, <code class="language-plaintext highlighter-rouge">a</code> is 123, and <code class="language-plaintext highlighter-rouge">b</code> is “word”.  This description is brief and is useful when running a calculation, but the brevity does violence in understanding how a program achieves that directness of the symbols <code class="language-plaintext highlighter-rouge">a</code> being 123 and <code class="language-plaintext highlighter-rouge">b</code> being “word”.</p>
+
+<p>When 123 is assigned to the variable <code class="language-plaintext highlighter-rouge">a</code>, <code class="language-plaintext highlighter-rouge">a</code> now references the <strong>number</strong> 123.  When “word” is assigned to the variable <code class="language-plaintext highlighter-rouge">b</code>, <code class="language-plaintext highlighter-rouge">b</code> now references the <strong>string</strong> “word”.  Both the number and string are <strong>primitive data types,</strong> “primitive” because they are the simplest expression available (not an object, has no methods and no properties) and “data type” because machines have to model binary code into something graspable for humans to work with and relate to.  When <code class="language-plaintext highlighter-rouge">a</code> or <code class="language-plaintext highlighter-rouge">b</code> are called, the expression they reference is evaluated and a vale returned.  Evaluating the expression 123 returns the value 123, evaluating the expression “word” returns the value “word”.  This distinction isn’t particularly worthwhile when the expression only consists of primitive data types, but when the expression becomes larger, stating something more verbose and comprehensive, the distinction becomes useful.  That “something” could be, listed in increasing complexity order, a data structure, a function, or an object.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">123</span>
+<span class="kd">const</span> <span class="nx">b</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">word</span><span class="dl">"</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>The below code block demonstrates how an expression on the right-hand-side of the assignment operator is first evaluated, a value returned and then assigned to a variable on the left-hand-side of the assignment operator.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">c</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="kd">const</span> <span class="nx">d</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+
+<span class="kd">const</span> <span class="nx">i</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="kd">const</span> <span class="nx">j</span> <span class="o">=</span> <span class="p">{</span><span class="na">w</span><span class="p">:</span> <span class="dl">"</span><span class="s2">w-descriptor</span><span class="dl">"</span><span class="p">}</span>
+<span class="kd">const</span> <span class="nx">k</span> <span class="o">=</span> <span class="p">{</span><span class="na">x</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="k">return</span> <span class="dl">"</span><span class="s2">x-descriptor</span><span class="dl">"</span><span class="p">}}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Following evaluation, calls can be made to the variables.  <code class="language-plaintext highlighter-rouge">c</code> returns an array object, and <code class="language-plaintext highlighter-rouge">d</code> returns an array object which contains a sequence of numbers.  <code class="language-plaintext highlighter-rouge">i</code> returns an object literal; <code class="language-plaintext highlighter-rouge">j</code> returns an object literal which contains a property <code class="language-plaintext highlighter-rouge">w</code>; <code class="language-plaintext highlighter-rouge">j.w</code> returns the string “w-descriptor”; <code class="language-plaintext highlighter-rouge">k</code> returns an object literal which contains a property <code class="language-plaintext highlighter-rouge">x</code>; <code class="language-plaintext highlighter-rouge">k.x</code> returns an anonymous function declaration bound to the <code class="language-plaintext highlighter-rouge">x</code> property; <code class="language-plaintext highlighter-rouge">k.x()</code> returns the string “x-descriptor”.</p>
+
+<p>Put another way, <code class="language-plaintext highlighter-rouge">c</code> is a symbol that represents an array object and <code class="language-plaintext highlighter-rouge">d</code> is a symbol that represents an array object containing a sequence of numbers.  <code class="language-plaintext highlighter-rouge">i</code> is a symbol for an object literal; <code class="language-plaintext highlighter-rouge">j</code> is a symbol for an object literal which contains a <code class="language-plaintext highlighter-rouge">w</code> property; <code class="language-plaintext highlighter-rouge">w</code> is a symbol for the string “w-descriptor”; <code class="language-plaintext highlighter-rouge">k</code> is a symbol for an object literal which contains the <code class="language-plaintext highlighter-rouge">x</code> property; <code class="language-plaintext highlighter-rouge">k.x</code> is a symbol for an anonymous function declaration; <code class="language-plaintext highlighter-rouge">k.x()</code> is a symbol for “x-descriptor”.</p>
+
+<p>So far, the left-hand-side of the equation only consists of one symbol.  But when there are two or more symbols on the left-hand-side, the statement changes from a <em>simple assignment</em> to a <em>destructuring assignment</em>.  A destructuring assignment tries to map values on the right-hand-side of the assignment operator to symbols on the left-hand-side of the assignment operator.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="p">[</span><span class="nx">e</span><span class="p">,</span> <span class="nx">f</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="kd">const</span> <span class="p">[</span><span class="nx">g</span><span class="p">,</span> <span class="nx">h</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">9</span><span class="p">,]</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>In array destructuring assignments, the assignment is based on the number of elements available and their positions.  If the left-hand-side contains the same number of elements as the right-hand-side, then all left-hand-side symbols will return a value: <code class="language-plaintext highlighter-rouge">e</code> returns 7 and <code class="language-plaintext highlighter-rouge">f</code> returns 8.  Whereas if the left-hand-side contains a fewer number of elements than the right-hand-side, then only the first elements in the left-hand-side will be assigned a value, the latter elements will be assigned ‘undefined’, so <code class="language-plaintext highlighter-rouge">g</code> returns 9, and <code class="language-plaintext highlighter-rouge">h</code> returns ‘undefined’.  In the example of <code class="language-plaintext highlighter-rouge">const [e, f]</code>, if <code class="language-plaintext highlighter-rouge">[7, 8]</code> were represented by a symbol <code class="language-plaintext highlighter-rouge">gg</code> then the values can still be distributed.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">gg</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="kd">const</span> <span class="p">[</span><span class="nx">e</span><span class="p">,</span> <span class="nx">f</span><span class="p">]</span> <span class="o">=</span> <span class="nx">gg</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Array destructuring can be expressed in these terms: <code class="language-plaintext highlighter-rouge">const [a_0, a_1, a_n] = [b_0, b_1, b_n]</code>, where <code class="language-plaintext highlighter-rouge">a</code> is a symbol, <code class="language-plaintext highlighter-rouge">b</code> is a value, and the numbers <code class="language-plaintext highlighter-rouge">0</code>, <code class="language-plaintext highlighter-rouge">1</code> and <code class="language-plaintext highlighter-rouge">n</code> represent the positions of related symbols and values.</p>
+
+<p>In object destructuring assignments, instead of assignment based on position, assignment is based on shared symbols. The <code class="language-plaintext highlighter-rouge">l</code> symbol will return a function; the <code class="language-plaintext highlighter-rouge">l()</code> symbol will return “l-descriptor”; <code class="language-plaintext highlighter-rouge">m</code> will return ‘undefined’; <code class="language-plaintext highlighter-rouge">m()</code> will return a TypeError as ‘undefined’ is not a function and cannot be invoked; <code class="language-plaintext highlighter-rouge">r</code>, and what it represents, is discarded.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="p">{</span><span class="nx">l</span><span class="p">,</span> <span class="nx">m</span><span class="p">}</span> <span class="o">=</span> <span class="p">{</span><span class="na">l</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="dl">"</span><span class="s2">l-descriptor</span><span class="dl">"</span><span class="p">},</span> <span class="na">r</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="dl">"</span><span class="s2">r-descriptor</span><span class="dl">"</span><span class="p">}}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>The use case of object destructuring becomes relevant during factory functions when they return object literals.  The returned object literal contain symbols to inner parts of a factory function normally inaccessible to an outer scope by a way of closure.  The object literal returned is then included in another factory function to pass along other symbols:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">Dialogue</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">speak</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{}</span>
+    <span class="kd">const</span> <span class="nx">think</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{}</span>
+    <span class="kd">const</span> <span class="nx">emote</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{}</span>
+    
+    <span class="k">return</span> <span class="p">{</span> <span class="nx">speak</span><span class="p">,</span> <span class="nx">think</span><span class="p">,</span> <span class="nx">emote</span> <span class="p">}</span> <span class="c1">// object literal returned when Dialogue is invoked</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">Character</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">speak</span><span class="p">,</span> <span class="nx">think</span><span class="p">,</span> <span class="nx">emote</span> <span class="p">}</span> <span class="o">=</span> <span class="nc">Dialogue</span><span class="p">()</span> <span class="c1">// Dialogue is invoked</span>
+    <span class="c1">// speak, think, and emote are available to Character.</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">InnerPersona</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">think</span> <span class="p">}</span> <span class="o">=</span> <span class="nc">Dialogue</span><span class="p">()</span>
+    <span class="c1">// think is available to InnerPersona, but not speak or emote.</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">Dialogue</code> factory function has three named function expressions <code class="language-plaintext highlighter-rouge">speak</code>, <code class="language-plaintext highlighter-rouge">think</code> and <code class="language-plaintext highlighter-rouge">emote</code> from which the <code class="language-plaintext highlighter-rouge">Character</code> factory function can use via destructuring assignment.</p>
+
+<p>Readings</p>
+<ul>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#assignment_operators">assignment operator</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Glossary/Primitive">primitives</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Glossary/Object">objects</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#object_literals">object literals</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#assigning_to_properties">assignment to properties</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#destructuring">destructuring assignment (primer)</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">destructuring assignment</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#array_destructuring">array destructuring</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#object_destructuring">object destructuring</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors">property accessors</a></li>
+</ul>
+
+<h1 id="functions">Functions</h1>
 <p>Essay Topic: “Thinking in patterns, forests not trees” — compare and contrast objects produced with <strong>classes</strong> and objects produced by <strong>factory functions</strong>.</p>
 
 <p>Using a high-level programming language, we can logically move from completing operations with primitive operands towards communication between different objects.  This essay attempts to clarify and bridge this gap between these two seemingly unrelated patterns.</p>
