@@ -20,9 +20,75 @@
   <a href="./ide">ide</a>
   <a href="./sys_admin">sys admin</a>
   <a href="./espirit_de_corps">espirit de corps</a>
+  <a href="./polis">πόλις</a>
+  <a href="./oikos">οίκος</a>
+  <a href="./glossa">γλώσσα</a>
 </nav>
 
-  <h1 id="npm-webpack">npm, Webpack</h1>
+  <h1 id="vim">Vim</h1>
+
+<p><code class="language-plaintext highlighter-rouge">:help</code> opens the vim reference manual
+<code class="language-plaintext highlighter-rouge">/</code> to begin searching bookmarks in the <code class="language-plaintext highlighter-rouge">:pattern</code></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">&lt;leader&gt;</code> key is mapped to backslash by default, and can be configured by changing the <code class="language-plaintext highlighter-rouge">mapleader</code> variable</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">:help leader</code> for more info</p>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">:help plugin</code> and <code class="language-plaintext highlighter-rouge">:help packages</code> for documentation on setting up plugins</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">~/.vim/plugin/</code> root plugin directory, place subdirectories of the plugins needed in here</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">CTRL+W</code> and <code class="language-plaintext highlighter-rouge">ijkl</code> direct key to change window focus</p>
+  </li>
+  <li>Set up <strong>vim-plug</strong></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">~/.vim/autload</code> directory which starts plugins on vim loading.  <code class="language-plaintext highlighter-rouge">plug.vim</code> file is placed here</p>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">~/.vim/plugged</code> directory where plugins specified in <code class="language-plaintext highlighter-rouge">.vimrc</code> file are installed following <code class="language-plaintext highlighter-rouge">:PlugInstall</code></li>
+  <li>Configure <code class="language-plaintext highlighter-rouge">.vimrc</code> file with header <code class="language-plaintext highlighter-rouge">call plug#begin()</code> and footer <code class="language-plaintext highlighter-rouge">call plug#end()</code>, placing wanted plugins in this block with the notation <code class="language-plaintext highlighter-rouge">Plug 'author/plugin-name'</code></li>
+</ul>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre> <span class="k">call</span> plug#begin<span class="p">()</span>
+ 
+  
+ Plug <span class="s1">'tpope/vim-surround'</span>
+ Plug <span class="s1">'easymotion/vim-easymotion'</span>
+  
+ <span class="k">call</span> plug#end<span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<ul>
+  <li><strong>vim-easy-motion</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">:help easymotion.txt</code> to open help documentation</li>
+  <li>Example config which reduces the leader key usage by 50%, from 2 to 1 keypresses:</li>
+</ul>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="c">" &lt;Leader&gt;f{char} to move to {char}</span>
+<span class="nb">map</span>  <span class="p">&lt;</span>Leader<span class="p">&gt;</span><span class="k">f</span> <span class="p">&lt;</span>Plug<span class="p">&gt;(</span>easymotion<span class="p">-</span><span class="k">bd</span><span class="p">-</span><span class="k">f</span><span class="p">)</span>
+nmap <span class="p">&lt;</span>Leader<span class="p">&gt;</span><span class="k">f</span> <span class="p">&lt;</span>Plug<span class="p">&gt;(</span>easymotion<span class="p">-</span>overwin<span class="p">-</span><span class="k">f</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<ul>
+  <li>In Pycharm you need to install IdeaVim-EasyMotion plugin which also installs AceJump.</li>
+  <li>The below configuration cannot work with the above configuration, there’s a bug which prevents the interface from parsing correctly; would need to study the source to understand the bug before fixing.
+    <div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nb">map</span> <span class="p">&lt;</span>Leader<span class="p">&gt;</span> <span class="p">&lt;</span>Plug<span class="p">&gt;(</span>easymotion<span class="p">-</span>prefix<span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ul>
+
+<h1 id="npm-webpack">npm, Webpack</h1>
 
 <p>The <code class="language-plaintext highlighter-rouge">npm init</code> command initialises a new project in the current folder, in other words, this folder is now the root directory of the project.  A <strong>package.json</strong> file is created in this space which functions as a config file for the project during development builds and in production builds.</p>
 
@@ -114,8 +180,9 @@
   <li><a href="https://webpack.js.org/guides/development/">webpack guide: development, webpack watch</a></li>
 </ul>
 
-<h1 id="vim">Vim</h1>
+<h1 id="vim-1">Vim</h1>
 <ul>
+  <li><code class="language-plaintext highlighter-rouge">caw</code>, change a word</li>
   <li><code class="language-plaintext highlighter-rouge">cs</code>, change surrounding quotes or brackets
     <ul>
       <li><code class="language-plaintext highlighter-rouge">cs([</code></li>
@@ -127,14 +194,34 @@
       <li><code class="language-plaintext highlighter-rouge">ci(</code></li>
     </ul>
   </li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;ESC&gt;</code> move into Normal mode</li>
+  <li><code class="language-plaintext highlighter-rouge">O</code> open new line above cursor</li>
+  <li><code class="language-plaintext highlighter-rouge">o</code> open new line below cursor</li>
+  <li><code class="language-plaintext highlighter-rouge">gg</code>, go to first line</li>
+  <li><code class="language-plaintext highlighter-rouge">GG</code>, go to last line</li>
+  <li><code class="language-plaintext highlighter-rouge">10gg</code>, go to 10th line</li>
+  <li><code class="language-plaintext highlighter-rouge">10G</code>, go to 10th line</li>
+  <li><code class="language-plaintext highlighter-rouge">d</code>, delete operator</li>
+  <li><code class="language-plaintext highlighter-rouge">dd</code>, delete entire line</li>
+  <li><code class="language-plaintext highlighter-rouge">w</code>, motion to start of next word, excludes first character</li>
+  <li><code class="language-plaintext highlighter-rouge">e</code>, motion to end of current word, includes last character</li>
+  <li><code class="language-plaintext highlighter-rouge">$</code>, motion to end of line, includes last character</li>
+  <li><code class="language-plaintext highlighter-rouge">u</code>, undo command</li>
+  <li><code class="language-plaintext highlighter-rouge">CTRL-R</code>, redo command (conflicts with Pycharm default find and replace)</li>
+  <li><code class="language-plaintext highlighter-rouge">/</code>, search command, search for a phrase then press <code class="language-plaintext highlighter-rouge">&lt;ENTER&gt;</code>; remembers phrase even when returning from insert mode to normal mode so you can press <code class="language-plaintext highlighter-rouge">n</code> and <code class="language-plaintext highlighter-rouge">N</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">n</code>, when phrase is searched, press this to find the next entry</li>
+  <li><code class="language-plaintext highlighter-rouge">N</code>, when phrase is searched, press this to find previous entry (inverse next)</li>
+  <li><code class="language-plaintext highlighter-rouge">%</code>, find matching parentheses, place cursor on parentheses to use</li>
 </ul>
 
 <h1 id="pycharm">Pycharm</h1>
 <ul>
   <li><code class="language-plaintext highlighter-rouge">Ctrl + Shift + n</code>, navigate files in your directory tree with keypresses.</li>
-  <li><code class="language-plaintext highlighter-rouge">Shift + Alt + 7</code>, finds the target’s usages in all places.  A comprehensive lookup which addresses the shortcomings of <code class="language-plaintext highlighter-rouge">F4</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Ctrl + Alt + Shift + n</code> navigate to symbols; need to use this to search for factory functions as they don’t count as classes.</li>
+  <li><code class="language-plaintext highlighter-rouge">Shift + Alt + 7</code>, finds the target’s usages in all places.  A comprehensive lookup which addresses the shortcomings of <code class="language-plaintext highlighter-rouge">F4</code>.</li>
   <li><code class="language-plaintext highlighter-rouge">F4</code>, jumps to target’s source.  For javascript the source is the returned function for public use from a factory function.  Pycharm seems unable to go a step further and look for the named function expression the symbol belongs to.</li>
-  <li><code class="language-plaintext highlighter-rouge">Ctrl+B</code>, go to delcaration or usages.</li>
+  <li><code class="language-plaintext highlighter-rouge">Ctrl+B</code>, go to declaration or usages.</li>
+  <li></li>
 </ul>
 
 </body>

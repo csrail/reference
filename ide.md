@@ -3,6 +3,51 @@ layout: default
 title: ide
 ---
 
+# Vim
+
+`:help` opens the vim reference manual
+`/` to begin searching bookmarks in the `:pattern`
+- `<leader>` key is mapped to backslash by default, and can be configured by changing the `mapleader` variable
+- `:help leader` for more info
+
+- `:help plugin` and `:help packages` for documentation on setting up plugins
+- `~/.vim/plugin/` root plugin directory, place subdirectories of the plugins needed in here
+
+- `CTRL+W` and `ijkl` direct key to change window focus
+
+- Set up __vim-plug__
+- `~/.vim/autload` directory which starts plugins on vim loading.  `plug.vim` file is placed here
+
+- `~/.vim/plugged` directory where plugins specified in `.vimrc` file are installed following `:PlugInstall`
+- Configure `.vimrc` file with header `call plug#begin()` and footer `call plug#end()`, placing wanted plugins in this block with the notation `Plug 'author/plugin-name'`
+
+```vim
+ call plug#begin()
+ 
+  
+ Plug 'tpope/vim-surround'
+ Plug 'easymotion/vim-easymotion'
+  
+ call plug#end()
+```
+
+- __vim-easy-motion__
+- `:help easymotion.txt` to open help documentation
+- Example config which reduces the leader key usage by 50%, from 2 to 1 keypresses:
+
+```vim
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+```
+
+- In Pycharm you need to install IdeaVim-EasyMotion plugin which also installs AceJump.
+- The below configuration cannot work with the above configuration, there's a bug which prevents the interface from parsing correctly; would need to study the source to understand the bug before fixing.
+```vim
+map <Leader> <Plug>(easymotion-prefix)
+```
+
+
 # npm, Webpack
 
 The `npm init` command initialises a new project in the current folder, in other words, this folder is now the root directory of the project.  A __package.json__ file is created in this space which functions as a config file for the project during development builds and in production builds.
@@ -67,14 +112,35 @@ Readings:
 - [webpack guide: development, webpack watch](https://webpack.js.org/guides/development/)
 
 # Vim
+- `caw`, change a word
 - `cs`, change surrounding quotes or brackets
   - `cs([`
 - `ci`, change inner contents of quotes or brackets
   - `ci"`
   - `ci(`
+- `<ESC>` move into Normal mode
+- `O` open new line above cursor
+- `o` open new line below cursor
+- `gg`, go to first line
+- `GG`, go to last line
+- `10gg`, go to 10th line
+- `10G`, go to 10th line
+- `d`, delete operator
+- `dd`, delete entire line
+- `w`, motion to start of next word, excludes first character
+- `e`, motion to end of current word, includes last character
+- `$`, motion to end of line, includes last character
+- `u`, undo command
+- `CTRL-R`, redo command (conflicts with Pycharm default find and replace)
+- `/`, search command, search for a phrase then press `<ENTER>`; remembers phrase even when returning from insert mode to normal mode so you can press `n` and `N`.
+- `n`, when phrase is searched, press this to find the next entry
+- `N`, when phrase is searched, press this to find previous entry (inverse next)
+- `%`, find matching parentheses, place cursor on parentheses to use
 
 # Pycharm
 - `Ctrl + Shift + n`, navigate files in your directory tree with keypresses.
-- `Shift + Alt + 7`, finds the target's usages in all places.  A comprehensive lookup which addresses the shortcomings of `F4`
+- `Ctrl + Alt + Shift + n` navigate to symbols; need to use this to search for factory functions as they don't count as classes.
+- `Shift + Alt + 7`, finds the target's usages in all places.  A comprehensive lookup which addresses the shortcomings of `F4`.
 - `F4`, jumps to target's source.  For javascript the source is the returned function for public use from a factory function.  Pycharm seems unable to go a step further and look for the named function expression the symbol belongs to.
-- `Ctrl+B`, go to delcaration or usages.
+- `Ctrl+B`, go to declaration or usages.
+- 
