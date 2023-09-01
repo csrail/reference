@@ -25,7 +25,95 @@
   <a href="./glossa">γλώσσα</a>
 </nav>
 
-  
+  <h1 id="grid-module">grid module</h1>
+<ul>
+  <li>Two dimension stream.</li>
+  <li>Layout suitable for large zones.</li>
+</ul>
+
+<h1 id="flexbox-module">flexbox module</h1>
+<ul>
+  <li>Single dimension stream.</li>
+  <li>Layout suitable for small zones.</li>
+</ul>
+
+<p>Format:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">display: flex</code> sets the target to be a ‘flex container’, every child element within it behaves as a ‘flex item’</li>
+  <li>there are two keys, main and cross, with three properties each: axis, start-end, size
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">main axis</code>: <code class="language-plaintext highlighter-rouge">main start-end</code>, <code class="language-plaintext highlighter-rouge">main size</code></li>
+      <li><code class="language-plaintext highlighter-rouge">cross axis</code>: <code class="language-plaintext highlighter-rouge">cross start-end</code>, <code class="language-plaintext highlighter-rouge">cross size</code></li>
+    </ul>
+  </li>
+  <li>flex items are placed in the flex-direction layout, not the block layout or inline layout;</li>
+  <li><code class="language-plaintext highlighter-rouge">flex-direction</code> can be set to <code class="language-plaintext highlighter-rouge">row</code> or <code class="language-plaintext highlighter-rouge">column</code>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">row</code> is the default</li>
+      <li>reverse options exist</li>
+    </ul>
+  </li>
+  <li>flex items can follow logical order expected from reading a book, from left to right, top to bottom when <code class="language-plaintext highlighter-rouge">flex-direction</code> is set to <code class="language-plaintext highlighter-rouge">row</code>, and <code class="language-plaintext highlighter-rouge">flex-wrap</code> is set to <code class="language-plaintext highlighter-rouge">wrap</code>; without <code class="language-plaintext highlighter-rouge">flex-wrap</code>, flex items would continue to be placed in the direction of flex-direction even if they would overflow their container.</li>
+</ul>
+
+<p>The <strong>macro arrangement</strong> of flex items is governed by <strong>flex-direction</strong> in relation to the flex containers, flex items, the main axis, and the cross axis.</p>
+<ul>
+  <li>for the given construct: a single column with three rows in it, there would be one flex container, three flex items, and the container’s flex-direction set to column.</li>
+  <li>in the same construct, the first flex item could itself be a flex container and contain a single row of elements, with the container’s flex-direction set to row.</li>
+</ul>
+
+<p>The <strong>micro arrangement</strong> of flex items is governed by the <strong>alignment module</strong><sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup> in relation to the flex containers, flex items, main axis, cross axis and whether there is a single row of items or more than one row of items enabled through flex-wrap.</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">justify-content</code> applied onto the flex container will space flex items out along the main axis.</li>
+  <li><code class="language-plaintext highlighter-rouge">align-content</code> applied onto the flex container will space flex items out along the cross axis, only observable when there are two or more streams of items as provisioned by flex-wrap being enabled.</li>
+  <li>the behaviour of <code class="language-plaintext highlighter-rouge">justify-content</code> and <code class="language-plaintext highlighter-rouge">align-content</code> can be thought of as adjusting the flex container’s padding; adjusting the padding around the flex items inside the container</li>
+  <li><code class="language-plaintext highlighter-rouge">align-items</code> applied onto the flex container will apply its ruleset to the flex item as <code class="language-plaintext highlighter-rouge">align-self</code>, i.e, set the property with <code class="language-plaintext highlighter-rouge">align-items</code>, but look up <code class="language-plaintext highlighter-rouge">align-self</code> documentation for behaviour</li>
+  <li>the behaviour of <code class="language-plaintext highlighter-rouge">align-self</code> can be thought of as adjusting the flex item’s margin</li>
+  <li>although the <code class="language-plaintext highlighter-rouge">justify-items</code> and <code class="language-plaintext highlighter-rouge">justify-self</code> properties exists, they aren’t for flexbox!</li>
+</ul>
+
+<p>flexbox expansion content filling, overflow</p>
+
+<p>flexibility</p>
+
+<p>Quick Recipe 1:</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="nc">.container</span> <span class="p">{</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.item</span> <span class="p">{</span>
+    
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Readings:</p>
+<ul>
+  <li><a href="https://www.w3.org/TR/css-flexbox/">w3C: flexbox</a></li>
+  <li><a href="https://www.w3.org/TR/css-align/">w3C: css box alignment</a></li>
+  <li><a href="https://www.w3.org/TR/css-flexbox/#justify-content-property">w3C: main-axis alignment</a></li>
+  <li><a href="https://www.w3.org/TR/css-flexbox/#justify-content-property">w3C: cross-axis alignment</a></li>
+  <li><a href="https://www.w3.org/TR/css-flexbox/#flexibility">w3C: flexibility</a></li>
+  <li><a href="https://www.w3.org/TR/css-align/#overview">w3C: alignment reference</a></li>
+  <li><a href="https://www.w3.org/TR/css-align/#distribution-values">w3C: distribution reference</a></li>
+  <li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">css tricks: flexbox</a></li>
+  <li><a href="https://css-tricks.com/understanding-flex-grow-flex-shrink-and-flex-basis/">css tricks: flexbox grow, shrink, basis</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox">mdn: flexbox</a></li>
+  <li><a href="https://github.com/w3c/csswg-drafts">csswg-drafts: bleeding edge css features</a></li>
+</ul>
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>The alignment module has relations to the writing mode which encompasses the <a href="https://www.w3.org/TR/css-writing-modes-4/#block-axis">block axis</a> and <a href="https://www.w3.org/TR/css-writing-modes-4/#inline-axis">inline axis</a> <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
 
 </body>
 </html>
