@@ -25,7 +25,63 @@
   <a href="./glossa">γλώσσα</a>
 </nav>
 
+  <h1 id="object-oriented-programming">Object oriented programming</h1>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">Consumable</span> <span class="o">=</span> <span class="p">(</span><span class="nx">obj</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">[</span><span class="dl">'</span><span class="s1">name</span><span class="dl">'</span><span class="p">];</span>
+  <span class="kd">const</span> <span class="nx">description</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">[</span><span class="dl">'</span><span class="s1">description</span><span class="dl">'</span><span class="p">];</span>
+  <span class="kd">const</span> <span class="nx">price</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">[</span><span class="dl">'</span><span class="s1">price</span><span class="dl">'</span><span class="p">];</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">getCourse</span> <span class="p">}</span> <span class="o">=</span> <span class="nc">Food</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">getStyle</span> <span class="p">}</span> <span class="o">=</span> <span class="nc">Beverage</span><span class="p">(</span><span class="nx">obj</span><span class="p">[</span><span class="dl">'</span><span class="s1">style</span><span class="dl">'</span><span class="p">]);</span>
+
+  <span class="kd">const</span> <span class="nx">getName</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">name</span> <span class="p">}</span>
+  <span class="kd">const</span> <span class="nx">getDescription</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">description</span> <span class="p">}</span>
+  <span class="kd">const</span> <span class="nx">getPrice</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">price</span><span class="p">}</span>
   
+  <span class="k">return</span> <span class="p">{</span> <span class="nx">getName</span><span class="p">,</span> <span class="nx">getDescription</span><span class="p">,</span> <span class="nx">getPrice</span> <span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Consumable was initially defined with positional parameters to create a Consumable object with properties, something like <code class="language-plaintext highlighter-rouge">const Consumable = (name, description, price) =&gt; {}</code>.  This architecture works with the expectation that the arguments received are always in the same order and format.  ‘Order’ defined here in terms of parameter <code class="language-plaintext highlighter-rouge">a_1</code> being in argument position 1, parameter <code class="language-plaintext highlighter-rouge">a_2</code> being in argument position 2, parameter <code class="language-plaintext highlighter-rouge">a_3</code> being in argument position 3, stated: <code class="language-plaintext highlighter-rouge">a_1, a_2, a_3, ...a_n : 1, 2, 3, ...n</code>. ‘Format’ defined  in terms of the expectation the data type of <code class="language-plaintext highlighter-rouge">a_1, a_2, ...a_n</code> will always be the data type we expect of them.  This expectation of the ‘same order and format’ cannot be satisfied if there is a requirement for the program to be adapted and expanded to meet the changing needs of users: i.e. any software used in production with a strong user base.  Keywords in argument for better architecture: ‘adapted and expanded’, ‘changing needs’.</p>
+
+<p>To improve upon this architecture, Consumable is defined to use a single object parameter instead of positional parameters: <code class="language-plaintext highlighter-rouge">const Consumable = (obj = {}) =&gt; {}</code>.  <code class="language-plaintext highlighter-rouge">obj</code> is a symbol, and the human-readable expectation is that <code class="language-plaintext highlighter-rouge">obj</code> is an object so the argument will be used in that manner.  However, to Consumable, <code class="language-plaintext highlighter-rouge">obj</code> is just a symbol and Consumable is ignorant beyond what <code class="language-plaintext highlighter-rouge">obj</code> actually is.  It should be noted that Consumable can be initialised without an <code class="language-plaintext highlighter-rouge">obj</code> argument by setting the default value of the <code class="language-plaintext highlighter-rouge">obj</code> parameter to <code class="language-plaintext highlighter-rouge">{}</code>, an empty object.  This is useful because Consumable can now be initialised, without arguments “needing to be needed”, and passed to other objects to share its methods – this pattern seems familiar… a mixin pattern perhaps?  The parameters <code class="language-plaintext highlighter-rouge">a_1, a_2, a_3, ...a_n</code> have been encapsulated into a single parameter <code class="language-plaintext highlighter-rouge">obj</code>, and their values can be extracted by assigning the values to properties; the object passed into Consumable will take the form of: <code class="language-plaintext highlighter-rouge">{k_1: a_1, k_2: a_2, k_3: a_3, ...k_n: a_n}</code>, where <code class="language-plaintext highlighter-rouge">k</code> refers to a named property the value <code class="language-plaintext highlighter-rouge">a</code> belongs to.  Values can then be set to variables inside Consumable through an object-key pattern <code class="language-plaintext highlighter-rouge">const k_1 = obj['k_1']</code> which equates to <code class="language-plaintext highlighter-rouge">a_1</code>; more formally stated: <code class="language-plaintext highlighter-rouge">const k = obj['k']</code> gets <code class="language-plaintext highlighter-rouge">a</code>.</p>
+
+<p>Two objects understand the existence of the <code class="language-plaintext highlighter-rouge">k</code> property: the anonymous object passed as an argument to Consumable, and Consumable as an object.  If Consumable were passed to another object and the <code class="language-plaintext highlighter-rouge">k</code> variable made available (declared as <code class="language-plaintext highlighter-rouge">const k = obj['k'])</code>, whenever the value <code class="language-plaintext highlighter-rouge">a</code> is needed, you could call <code class="language-plaintext highlighter-rouge">k</code> in the new object.  The new object calling <code class="language-plaintext highlighter-rouge">k</code>, would then also be indirectly tied to the <code class="language-plaintext highlighter-rouge">k</code> property.  At least three objects now know about the existence of <code class="language-plaintext highlighter-rouge">k</code> property, if another object uses Consumable’s <code class="language-plaintext highlighter-rouge">k</code> property, then the count for objects knowing the existence of <code class="language-plaintext highlighter-rouge">k</code> property increases by 1.</p>
+
+<p>To state the case clearly:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">property_k</code> is contained in an anonymous object.</li>
+  <li>Consumable object takes anonymous object as an argument.</li>
+  <li>Consumable object takes <code class="language-plaintext highlighter-rouge">property-k</code> and declares the variable <code class="language-plaintext highlighter-rouge">constant-k</code>, initialising it with the value <code class="language-plaintext highlighter-rouge">object[property-k]</code>.</li>
+  <li>Consumable exposes <code class="language-plaintext highlighter-rouge">constant-k</code>, making it available for calling if other objects include Consumable in its composition.</li>
+  <li>A new X object is initialised which includes Consumable, the X object calls <code class="language-plaintext highlighter-rouge">constant-k</code> to do something.</li>
+  <li>Another Y object is initialised which includes Consumable, the Y object calls <code class="language-plaintext highlighter-rouge">constant-k</code> to do something.</li>
+  <li>Both X and Y indirectly know about <code class="language-plaintext highlighter-rouge">property-k</code> through this chaining.</li>
+  <li>At least four objects know about <code class="language-plaintext highlighter-rouge">property_k</code> either directly or indirectly: the anonymous object, Consumable, X and Y.</li>
+  <li>A Z object is initialised and includes Consumable, the Z object calls <code class="language-plaintext highlighter-rouge">constant-k</code> to do something.</li>
+  <li>Five objects now know about <code class="language-plaintext highlighter-rouge">property_k</code>: the anonymous object, Consumable, X, Y and Z.</li>
+</ul>
+
+<p>This handling of <code class="language-plaintext highlighter-rouge">property_k</code> can be improved.  This is achieved by decreasing the exposure of <code class="language-plaintext highlighter-rouge">property_k</code> through a getter function.  The getter function returns the value of <code class="language-plaintext highlighter-rouge">constant-k</code> which means a callable function now represents <code class="language-plaintext highlighter-rouge">property-k</code> whereas previously a callable variable <code class="language-plaintext highlighter-rouge">constant-k</code> represented <code class="language-plaintext highlighter-rouge">property-k</code>.  <code class="language-plaintext highlighter-rouge">constant-k</code> is now wrapped inside a <code class="language-plaintext highlighter-rouge">get-constant_k</code> getter function: this makes objects composed with Consumable and needing to use <code class="language-plaintext highlighter-rouge">constant-k</code> ignorant of <code class="language-plaintext highlighter-rouge">property-k</code>, these objects only know about <code class="language-plaintext highlighter-rouge">get-constant_k</code>.</p>
+
+<p>separation
+variable
+<code class="language-plaintext highlighter-rouge">Food(obj)</code></p>
+
+<p>Readings</p>
+<ul>
+  <li><a href=""></a></li>
+</ul>
 
 </body>
 </html>
