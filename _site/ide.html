@@ -25,7 +25,88 @@
   <a href="./glossa">γλώσσα</a>
 </nav>
 
-  <h1 id="vim">Vim</h1>
+  <h1 id="npm-webpack">npm, Webpack</h1>
+
+<p>This post describes how to progressively move towards automating the build and reloading process used in a development environment.</p>
+
+<ul>
+  <li>Transcompiling javascript files from their original source as per the webpack.config.js file is done via the command <code class="language-plaintext highlighter-rouge">npx webpack --config webpack.config.js</code>.  The webpage is manually visited by opening the html file.</li>
+  <li>This can be abstracted to the command <code class="language-plaintext highlighter-rouge">npm run build</code> when the <code class="language-plaintext highlighter-rouge">package.json</code> scripts node is updated.  The webpage is manually visited.</li>
+</ul>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="p">{</span><span class="w">
+  </span><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"build"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webpack"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+<ul>
+  <li>The transcompiling component can be automated by the command <code class="language-plaintext highlighter-rouge">npm run watch</code> when the <code class="language-plaintext highlighter-rouge">package.json</code> scripts node is updated.  The webpage is manually visited.</li>
+</ul>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="p">{</span><span class="w">
+  </span><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"build"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webpack"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"watch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webpack --watch"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<ul>
+  <li>Automated reloading of the webpage requires a web server.  Run <code class="language-plaintext highlighter-rouge">npm install --save-dev webpack-dev-server</code> in the command-line to install the package and include it in the <code class="language-plaintext highlighter-rouge">package.json</code> devDependencies node.  Then run <code class="language-plaintext highlighter-rouge">npm run start</code> when the <code class="language-plaintext highlighter-rouge">package.json</code> scripts node is updated.  In contrast, the webpage is now automatically visited at a particular port which looks for a html file, rather than specifically selecting a html file.  Transcompilation is also handled by the web server.</li>
+</ul>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="p">{</span><span class="w">
+  </span><span class="nl">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"build"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webpack"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"watch"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webpack --watch"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"start"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webpack server --open"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"devDependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"webpack-dev-server"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^4.15.1"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Readings:</p>
+<ul>
+  <li><a href="https://webpack.js.org/guides/getting-started/">npm run build</a></li>
+  <li><a href="https://webpack.js.org/guides/development/#using-watch-mode">npm run watch</a></li>
+  <li><a href="https://webpack.js.org/guides/development/#using-webpack-dev-server">npm run start</a></li>
+</ul>
+
+<h1 id="vim">Vim</h1>
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">:help subsitute</code></p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">ysiw'</code>, surround word with single quote marks.</p>
+  </li>
+</ul>
+
+<h1 id="vim-1">Vim</h1>
 
 <p><code class="language-plaintext highlighter-rouge">:help</code> opens the vim reference manual
 <code class="language-plaintext highlighter-rouge">/</code> to begin searching bookmarks in the <code class="language-plaintext highlighter-rouge">:pattern</code></p>
@@ -39,7 +120,7 @@
     <p><code class="language-plaintext highlighter-rouge">~/.vim/plugin/</code> root plugin directory, place subdirectories of the plugins needed in here</p>
   </li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">CTRL+W</code> and <code class="language-plaintext highlighter-rouge">ijkl</code> direct key to change window focus</p>
+    <p><code class="language-plaintext highlighter-rouge">CTRL+W</code> and <code class="language-plaintext highlighter-rouge">ijkl</code> direct key to change window focus if there are multiple windows</p>
   </li>
   <li>Set up <strong>vim-plug</strong></li>
   <li>
@@ -88,7 +169,7 @@ nmap <span class="p">&lt;</span>Leader<span class="p">&gt;</span><span class="k"
   </li>
 </ul>
 
-<h1 id="npm-webpack">npm, Webpack</h1>
+<h1 id="npm-webpack-1">npm, Webpack</h1>
 
 <p>The <code class="language-plaintext highlighter-rouge">npm init</code> command initialises a new project in the current folder, in other words, this folder is now the root directory of the project.  A <strong>package.json</strong> file is created in this space which functions as a config file for the project during development builds and in production builds.</p>
 
@@ -156,7 +237,6 @@ nmap <span class="p">&lt;</span>Leader<span class="p">&gt;</span><span class="k"
 10
 11
 12
-13
 </pre></td><td class="rouge-code"><pre><span class="c1">// webpack.config.js</span>
 <span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">);</span>
 
@@ -168,9 +248,8 @@ nmap <span class="p">&lt;</span>Leader<span class="p">&gt;</span><span class="k"
         <span class="c1">// clean: true,</span>
     <span class="p">},</span>
     <span class="na">devtool</span><span class="p">:</span> <span class="dl">'</span><span class="s1">eval</span><span class="dl">'</span><span class="p">,</span>
-    <span class="na">watch</span><span class="p">:</span> <span class="kc">true</span><span class="o">-</span> <span class="s2">`F4`</span><span class="p">,</span> <span class="nx">jumps</span> <span class="nx">to</span> <span class="nx">target</span><span class="dl">'</span><span class="s1">s source.  For javascript the source is the returned function for public use from a factory function.  Pycharm seems unable to go a step further and look for the named function expression the symbol belongs to.,
-};
-</span></pre></td></tr></tbody></table></code></pre></div></div>
+<span class="p">};</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>Readings:</p>
 <ul>
@@ -180,7 +259,7 @@ nmap <span class="p">&lt;</span>Leader<span class="p">&gt;</span><span class="k"
   <li><a href="https://webpack.js.org/guides/development/">webpack guide: development, webpack watch</a></li>
 </ul>
 
-<h1 id="vim-1">Vim</h1>
+<h1 id="vim-2">Vim</h1>
 <ul>
   <li><code class="language-plaintext highlighter-rouge">caw</code>, change a word</li>
   <li><code class="language-plaintext highlighter-rouge">cs</code>, change surrounding quotes or brackets
@@ -221,7 +300,8 @@ nmap <span class="p">&lt;</span>Leader<span class="p">&gt;</span><span class="k"
   <li><code class="language-plaintext highlighter-rouge">Shift + Alt + 7</code>, finds the target’s usages in all places.  A comprehensive lookup which addresses the shortcomings of <code class="language-plaintext highlighter-rouge">F4</code>.</li>
   <li><code class="language-plaintext highlighter-rouge">F4</code>, jumps to target’s source.  For javascript the source is the returned function for public use from a factory function.  Pycharm seems unable to go a step further and look for the named function expression the symbol belongs to.</li>
   <li><code class="language-plaintext highlighter-rouge">Ctrl+B</code>, go to declaration or usages.</li>
-  <li></li>
+  <li><code class="language-plaintext highlighter-rouge">Shift + Left-Click</code> on the gutter to create a non-suspending breakpoint that logs the evaluation.</li>
+  <li><code class="language-plaintext highlighter-rouge">Ctrl+E</code>, to view recent files.</li>
 </ul>
 
 </body>

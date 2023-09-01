@@ -3,6 +3,57 @@ layout: default
 title: ide
 ---
 
+# npm, Webpack
+
+This post describes how to progressively move towards automating the build and reloading process used in a development environment.
+
+- Transcompiling javascript files from their original source as per the webpack.config.js file is done via the command `npx webpack --config webpack.config.js`.  The webpage is manually visited by opening the html file.
+- This can be abstracted to the command `npm run build` when the `package.json` scripts node is updated.  The webpage is manually visited.
+
+```json
+{
+  "scripts": {
+    "build": "webpack"
+  }
+}
+```
+- The transcompiling component can be automated by the command `npm run watch` when the `package.json` scripts node is updated.  The webpage is manually visited.
+
+```json
+{
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch"
+  }
+}
+```
+
+- Automated reloading of the webpage requires a web server.  Run `npm install --save-dev webpack-dev-server` in the command-line to install the package and include it in the `package.json` devDependencies node.  Then run `npm run start` when the `package.json` scripts node is updated.  In contrast, the webpage is now automatically visited at a particular port which looks for a html file, rather than specifically selecting a html file.  Transcompilation is also handled by the web server.
+
+```json
+{
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "start": "webpack server --open"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^4.15.1"
+  }
+}
+```
+
+Readings:
+- [npm run build](https://webpack.js.org/guides/getting-started/)
+- [npm run watch](https://webpack.js.org/guides/development/#using-watch-mode)
+- [npm run start](https://webpack.js.org/guides/development/#using-webpack-dev-server)
+
+
+# Vim
+- `:help subsitute`
+
+- `ysiw'`, surround word with single quote marks.
+
 # Vim
 
 `:help` opens the vim reference manual
@@ -13,7 +64,7 @@ title: ide
 - `:help plugin` and `:help packages` for documentation on setting up plugins
 - `~/.vim/plugin/` root plugin directory, place subdirectories of the plugins needed in here
 
-- `CTRL+W` and `ijkl` direct key to change window focus
+- `CTRL+W` and `ijkl` direct key to change window focus if there are multiple windows
 
 - Set up __vim-plug__
 - `~/.vim/autload` directory which starts plugins on vim loading.  `plug.vim` file is placed here
@@ -101,7 +152,6 @@ module.exports = {
         // clean: true,
     },
     devtool: 'eval',
-    watch: true- `F4`, jumps to target's source.  For javascript the source is the returned function for public use from a factory function.  Pycharm seems unable to go a step further and look for the named function expression the symbol belongs to.,
 };
 ```
 
@@ -143,4 +193,5 @@ Readings:
 - `Shift + Alt + 7`, finds the target's usages in all places.  A comprehensive lookup which addresses the shortcomings of `F4`.
 - `F4`, jumps to target's source.  For javascript the source is the returned function for public use from a factory function.  Pycharm seems unable to go a step further and look for the named function expression the symbol belongs to.
 - `Ctrl+B`, go to declaration or usages.
-- 
+- `Shift + Left-Click` on the gutter to create a non-suspending breakpoint that logs the evaluation.
+- `Ctrl+E`, to view recent files.
