@@ -25,7 +25,80 @@
   <a href="./glossa">γλώσσα</a>
 </nav>
 
-  <h1 id="shell">Shell</h1>
+  <h1 id="cockpit">Cockpit</h1>
+
+<p>Readings</p>
+<ul>
+  <li><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/managing_systems_using_the_rhel_9_web_console/getting-started-with-the-rhel-9-web-console_system-management-using-the-rhel-9-web-console#logging-in-to-the-web-console_getting-started-with-the-rhel-9-web-console">web console</a></li>
+</ul>
+
+<h1 id="shell">Shell</h1>
+
+<p>Readings</p>
+<ul>
+  <li><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/configuring_basic_system_settings/introduction-to-systemd_configuring-basic-system-settings">systemd</a></li>
+  <li><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/configuring_basic_system_settings/assembly_troubleshooting-problems-using-log-files_configuring-basic-system-settings">log files, syslog</a></li>
+</ul>
+
+<h1 id="shell-1">Shell</h1>
+<p>Commands following the <code class="language-plaintext highlighter-rouge">$</code> symbol is a shell prompt for a normal user.  Commands following the <code class="language-plaintext highlighter-rouge">#</code> symbol are run by a superuser.</p>
+
+<ul>
+  <li>Run <code class="language-plaintext highlighter-rouge">$ systemctl list-units --type service</code> for a listing of active services.</li>
+  <li>Run <code class="language-plaintext highlighter-rouge">$ systemctl status firewalld.service</code> to check the state of the firewall.</li>
+  <li>Run <code class="language-plaintext highlighter-rouge"># systemctl enable --now firewalld</code> to start the firewall.  <code class="language-plaintext highlighter-rouge">enable</code> indicates the service <code class="language-plaintext highlighter-rouge">firewalld</code> should be started automatically after a reboot.  <code class="language-plaintext highlighter-rouge">--now</code> flag is equivalent to <code class="language-plaintext highlighter-rouge"># systemctl start firewalld</code></li>
+  <li>The full operational name for <code class="language-plaintext highlighter-rouge">firewalld</code> is <code class="language-plaintext highlighter-rouge">firewalld.service</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge"># systemctl start name.service</code>, <code class="language-plaintext highlighter-rouge"># systemctl stop name.service</code>, <code class="language-plaintext highlighter-rouge"># systemctl restart name.service</code></li>
+  <li><code class="language-plaintext highlighter-rouge"># systemctl reload name.service</code>, reload configuration without stopping execution of the service</li>
+  <li><code class="language-plaintext highlighter-rouge"># systemctl enable name.service</code> and <code class="language-plaintext highlighter-rouge"># systemctl disable name.service</code></li>
+</ul>
+
+<p>Readings</p>
+<ul>
+  <li><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/configuring_basic_system_settings/managing-system-services-with-systemctl_configuring-basic-system-settings">firewalld, systemctl</a></li>
+</ul>
+
+<h1 id="shell-2">Shell</h1>
+<p>Shell environment variables are declared with the following syntax: <code class="language-plaintext highlighter-rouge">KEYWORD="value"</code>, the shell variable uses capital letters, with no spaces between the equal operator and its surrounding operands.  To fetch the value of variable, use the dollar sign: <code class="language-plaintext highlighter-rouge">$KEYWORD</code>.</p>
+
+<p>Set up personal scripts to group tasks together.</p>
+<ul>
+  <li>In the <code class="language-plaintext highlighter-rouge">~/.bashrc</code> file, include your home directory script files in the shell execute path: <code class="language-plaintext highlighter-rouge">export PATH="$HOME/scripts/bin:$PATH</code>.</li>
+  <li>Create a new file <code class="language-plaintext highlighter-rouge">ide.sh</code>, placing it in the directory <code class="language-plaintext highlighter-rouge">~/scripts/bin</code>.</li>
+  <li>Make the file executable via <code class="language-plaintext highlighter-rouge">chmod +x ide.sh</code> and including the shebang declaration at the top of the file: <code class="language-plaintext highlighter-rouge">#!/bin/bash</code>.</li>
+  <li>After commands are included in the <code class="language-plaintext highlighter-rouge">~/scripts/bin/ide.sh</code> file, the command can be run by typing <code class="language-plaintext highlighter-rouge">ide.sh</code> in the command line</li>
+  <li>All commands executed as part of the script occur in a spawned subshell.</li>
+  <li>The spawned subshell resolves all the actions before returning control to the parent subshell.  This means that any context actions which place the shell in different directories are not carried over to the parent shell on control being returned.</li>
+  <li>An opportunity to operate within the subshell can occur if the subshell creates a listener process like a server.  Running <code class="language-plaintext highlighter-rouge">Ctrl+C</code> to cancel the server will instead cancel the subshell thereby killing any processes that the subshell has created.</li>
+  <li>The scripts must create processes that move standard output and standard errors into <code class="language-plaintext highlighter-rouge">/dev/null</code> otherwise the parent shell will log the information; and also run the process in the background.</li>
+  <li>Place <code class="language-plaintext highlighter-rouge">\</code> at the end of a line to continue the statement to the next line.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="c">#!/bin/bash</span>
+
+<span class="nv">reset</span><span class="o">=</span><span class="s1">'\033[0m'</span>
+<span class="nv">green</span><span class="o">=</span><span class="s1">'\033[1;32m'</span>
+<span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"</span><span class="nv">$green</span><span class="s2"> ide setup, executed</span><span class="nv">$reset</span><span class="s2">"</span>
+ 
+sh /opt/pycharm-2023.2/bin/pycharm.sh &amp;&gt;/dev/null &amp;
+
+firefox <span class="nt">--new-tab</span> <span class="nt">-url</span> <span class="s2">"http://127.0.0.1:4000/"</span> <span class="se">\</span>
+        <span class="nt">--new-tab</span> <span class="nt">-url</span> <span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/PycharmProjects/theodinproject2023/restaurant/dist/index.html"</span> <span class="se">\</span>
+        &amp;&gt;/dev/null &amp;
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h1 id="shell-3">Shell</h1>
 <ul>
   <li><code class="language-plaintext highlighter-rouge">info coreutils</code> to open documentation on GNU utilities; more comprehensive than <code class="language-plaintext highlighter-rouge">man</code> for the topics discussed</li>
   <li><code class="language-plaintext highlighter-rouge">tldr [COMMAND]</code> outputs quick reference documentation on a command; useful for getting an initial understanding</li>
@@ -34,9 +107,49 @@
   <li><code class="language-plaintext highlighter-rouge">man bash /REDIRECTION</code> and <code class="language-plaintext highlighter-rouge">man bash /Redirecting Standard Output and Standard Error</code> to learn more about <code class="language-plaintext highlighter-rouge">&amp;&gt;</code></li>
 </ul>
 
-<h1 id="shell-1">Shell</h1>
+<h1 id="shell-4">Shell</h1>
 <ul>
   <li><code class="language-plaintext highlighter-rouge">~/.bashrc</code> file</li>
+  <li>Set up aliases:</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="nv">CURRENT_PROJECT</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/PycharmProjects/theodinproject2023/restaurant/"</span>
+
+<span class="nb">alias </span><span class="nv">ll</span><span class="o">=</span><span class="s2">"ls -al --block-size=kB"</span>
+<span class="nb">alias rm</span><span class="o">=</span><span class="s2">"rm -i"</span>
+<span class="nb">alias </span><span class="nv">current</span><span class="o">=</span><span class="s2">"cd </span><span class="nv">$CURRENT_PROJECT</span><span class="s2">"</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<ul>
+  <li>Many sys_admin commands happen in startup and shutdown scripts within <code class="language-plaintext highlighter-rouge">etc/rc.d</code>.  Caution here.</li>
+</ul>
+
+<p>Host Information:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">uname -s</code> shows operating system type.</li>
+  <li><code class="language-plaintext highlighter-rouge">uname -m</code> shows the architecture, equivalent to <code class="language-plaintext highlighter-rouge">arch</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">uname -a</code> for a verbose description.</li>
+</ul>
+
+<p>Job Control:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">top -b</code> lists current processes using up CPU, outputs in text format to be parsed or accessed by a script.</li>
+  <li><code class="language-plaintext highlighter-rouge">ps aux</code> lists current processes by PID, output can be piped to <code class="language-plaintext highlighter-rouge">grep</code> or <code class="language-plaintext highlighter-rouge">sed</code></li>
+  <li><code class="language-plaintext highlighter-rouge">pstree</code> lists current processes in a tree format, very useful for understanding how the processes were spawned; <code class="language-plaintext highlighter-rouge">-p</code> option shows PIDs and process names, more verbose.</li>
+  <li><code class="language-plaintext highlighter-rouge">cron</code> is the root version of <code class="language-plaintext highlighter-rouge">at</code>; the daemon executing scheduled entries on<code class="language-plaintext highlighter-rouge">/etc/crontab</code>.  See <code class="language-plaintext highlighter-rouge">man 4 crontabs</code></li>
+</ul>
+
+<p>Readings:</p>
+<ul>
+  <li><a href="https://tldp.org/LDP/abs/abs-guide.pdf">the linux documentation project: advanced bash scripting</a></li>
+  <li><a href="https://tldp.org/LDP/abs/html/part4.html">abs: commands</a></li>
+  <li><a href="https://tldp.org/LDP/abs/html/system.html">abs: sys_admin commands</a></li>
+  <li><a href="https://www.frozentux.net/iptables-tutorial/iptables-tutorial.html">iptables</a></li>
 </ul>
 
 <h1 id="keyboard-input">Keyboard Input</h1>
