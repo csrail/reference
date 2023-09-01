@@ -115,8 +115,8 @@
 <span class="p">}</span>
 
 <span class="kd">const</span> <span class="nx">InnerPersona</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="kd">const</span> <span class="p">{</span> <span class="nx">think</span> <span class="p">}</span> <span class="o">=</span> <span class="nc">Dialogue</span><span class="p">()</span>
-    <span class="c1">// think is available to InnerPersona, but not speak or emote.</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="na">think</span><span class="p">:</span> <span class="nx">reason</span> <span class="p">}</span> <span class="o">=</span> <span class="nc">Dialogue</span><span class="p">()</span>
+    <span class="c1">// think is available to InnerPersona through the reason symbol; speak or emote are unavailable</span>
 <span class="p">}</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 

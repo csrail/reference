@@ -68,8 +68,8 @@ const Character = () => {
 }
 
 const InnerPersona = () => {
-    const { think } = Dialogue()
-    // think is available to InnerPersona, but not speak or emote.
+    const { think: reason } = Dialogue()
+    // think is available to InnerPersona through the reason symbol; speak or emote are unavailable
 }
 ```
 
