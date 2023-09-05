@@ -8,6 +8,66 @@ Readings
 - [web console](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/managing_systems_using_the_rhel_9_web_console/getting-started-with-the-rhel-9-web-console_system-management-using-the-rhel-9-web-console#logging-in-to-the-web-console_getting-started-with-the-rhel-9-web-console)
 
 # Shell
+Package Management System:
+- rpm.
+- Manage software across multiple workstations through metadata: install, read, update and delete software; c.f. software installed using tarball which doesn't have metadata information about the package contents, where the package came from etc
+- A Linux distribution builds a binary from the source code, gathers the binaries with documentation, config files and scripts, signs the package, deploys it, ready for distribution via FTP or NFS
+- The rpm repository is maintained by RedHat, software in this repository is open-source as meets strict testing requirements for distribution.
+
+- yum.
+- Builds on top of rpm utilities with a key focus: yum manages dependencies.
+- dnf supersedes yum.
+- `/etc/yum.conf`, yum config file
+- `/etc/yum.repos.d/`, directory of config files specific to a package to find their repo
+- `/var/log/dnf.log`, supersedes `/var/log/yum.log`
+- `/var/cache/dnf/` - cached package metadata location, supersedes `/var/cache/yum/`
+- `/var/lib/rpm/` - after installation, package metadata is stored in a database here; to query this database, use `rpm`.
+- Package metadata downloaded manages dependencies, pre-installation scripts, installation procedure and post-installation scripts
+- Use `dnf` followed by a __subcommand__ and argument to run operations
+
+Searching for packages:
+- `dnf search {KEYWORD}` finds packages related to keyword which can be the name or description of the package
+- `dnf provides {KEYWORD}` finds packages related to keyword which can be part of a name, description, command, config file etc. included in the package
+- `dnf info {PACKAGE}`
+- `dnf list {PACKAGE}`
+- `dnf list available`
+- `dnf list installed`
+- `dnf list all`
+- `dnf deplist {PACKAGE}` finds dependencies of a package
+
+Installing packages:
+- `dnf install {PACKAGE}`
+- `dnf reinstall {PACKAGE}` for repairing an installation
+
+Removing packages:
+- `dnf erase {PACKAGE}` removes only the selected package and ignores dependencies
+- `dnf remove {PACKAGE}` removes the package and its dependencies
+- `dnf history undo {ID}` undo an entire transaction based on history ID
+  - `dnf history`
+  - `dnf history info {ID}`
+
+Updating packages:
+- `dnf check-update` checks if new updates are available
+- `dnf update {PACKAGE}` updates a single package
+- `dnf update` updates all packages
+
+Group packages:
+- Groups of packages are bundled together to provide an environment / suite of tools e.g. postgresql, scientific support
+- `dnf grouplist`
+- `dnf groupinfo {PACKAGE_GROUP}`
+- `dnf groupinstall {PACKAGE_GROUP}`
+- `dnf groupremove {PACKAGE_GROUP}`
+
+- `rpm -qi firefox`
+
+
+
+# Shell
+- `# cat /var/log/messages | less`
+- `# dmesg | less`
+- `# journalctl`
+
+One of the many entries in `journalctl` is the logging of users running commands on a terminal, including the timestamp, what privilege and in which directory.
 
 Readings
 - [systemd](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/configuring_basic_system_settings/introduction-to-systemd_configuring-basic-system-settings)
@@ -95,5 +155,5 @@ Readings:
 
 # Keyboard Input
 
-- Settings > Keyboard > Input Sources > + > Greek.
+- Settings > Keyboard > Input Sources > + > Greek (polytonic).
 - `Super Key + Spacebar` to switch between inputs.

@@ -33,6 +33,83 @@
 </ul>
 
 <h1 id="shell">Shell</h1>
+<p>Package Management System:</p>
+<ul>
+  <li>rpm.</li>
+  <li>Manage software across multiple workstations through metadata: install, read, update and delete software; c.f. software installed using tarball which doesn’t have metadata information about the package contents, where the package came from etc</li>
+  <li>A Linux distribution builds a binary from the source code, gathers the binaries with documentation, config files and scripts, signs the package, deploys it, ready for distribution via FTP or NFS</li>
+  <li>
+    <p>The rpm repository is maintained by RedHat, software in this repository is open-source as meets strict testing requirements for distribution.</p>
+  </li>
+  <li>yum.</li>
+  <li>Builds on top of rpm utilities with a key focus: yum manages dependencies.</li>
+  <li>dnf supersedes yum.</li>
+  <li><code class="language-plaintext highlighter-rouge">/etc/yum.conf</code>, yum config file</li>
+  <li><code class="language-plaintext highlighter-rouge">/etc/yum.repos.d/</code>, directory of config files specific to a package to find their repo</li>
+  <li><code class="language-plaintext highlighter-rouge">/var/log/dnf.log</code>, supersedes <code class="language-plaintext highlighter-rouge">/var/log/yum.log</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/var/cache/dnf/</code> - cached package metadata location, supersedes <code class="language-plaintext highlighter-rouge">/var/cache/yum/</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/var/lib/rpm/</code> - after installation, package metadata is stored in a database here; to query this database, use <code class="language-plaintext highlighter-rouge">rpm</code>.</li>
+  <li>Package metadata downloaded manages dependencies, pre-installation scripts, installation procedure and post-installation scripts</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">dnf</code> followed by a <strong>subcommand</strong> and argument to run operations</li>
+</ul>
+
+<p>Searching for packages:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">dnf search {KEYWORD}</code> finds packages related to keyword which can be the name or description of the package</li>
+  <li><code class="language-plaintext highlighter-rouge">dnf provides {KEYWORD}</code> finds packages related to keyword which can be part of a name, description, command, config file etc. included in the package</li>
+  <li><code class="language-plaintext highlighter-rouge">dnf info {PACKAGE}</code></li>
+  <li><code class="language-plaintext highlighter-rouge">dnf list {PACKAGE}</code></li>
+  <li><code class="language-plaintext highlighter-rouge">dnf list available</code></li>
+  <li><code class="language-plaintext highlighter-rouge">dnf list installed</code></li>
+  <li><code class="language-plaintext highlighter-rouge">dnf list all</code></li>
+  <li><code class="language-plaintext highlighter-rouge">dnf deplist {PACKAGE}</code> finds dependencies of a package</li>
+</ul>
+
+<p>Installing packages:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">dnf install {PACKAGE}</code></li>
+  <li><code class="language-plaintext highlighter-rouge">dnf reinstall {PACKAGE}</code> for repairing an installation</li>
+</ul>
+
+<p>Removing packages:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">dnf erase {PACKAGE}</code> removes only the selected package and ignores dependencies</li>
+  <li><code class="language-plaintext highlighter-rouge">dnf remove {PACKAGE}</code> removes the package and its dependencies</li>
+  <li><code class="language-plaintext highlighter-rouge">dnf history undo {ID}</code> undo an entire transaction based on history ID
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">dnf history</code></li>
+      <li><code class="language-plaintext highlighter-rouge">dnf history info {ID}</code></li>
+    </ul>
+  </li>
+</ul>
+
+<p>Updating packages:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">dnf check-update</code> checks if new updates are available</li>
+  <li><code class="language-plaintext highlighter-rouge">dnf update {PACKAGE}</code> updates a single package</li>
+  <li><code class="language-plaintext highlighter-rouge">dnf update</code> updates all packages</li>
+</ul>
+
+<p>Group packages:</p>
+<ul>
+  <li>Groups of packages are bundled together to provide an environment / suite of tools e.g. postgresql, scientific support</li>
+  <li><code class="language-plaintext highlighter-rouge">dnf grouplist</code></li>
+  <li><code class="language-plaintext highlighter-rouge">dnf groupinfo {PACKAGE_GROUP}</code></li>
+  <li><code class="language-plaintext highlighter-rouge">dnf groupinstall {PACKAGE_GROUP}</code></li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">dnf groupremove {PACKAGE_GROUP}</code></p>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">rpm -qi firefox</code></li>
+</ul>
+
+<h1 id="shell-1">Shell</h1>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge"># cat /var/log/messages | less</code></li>
+  <li><code class="language-plaintext highlighter-rouge"># dmesg | less</code></li>
+  <li><code class="language-plaintext highlighter-rouge"># journalctl</code></li>
+</ul>
+
+<p>One of the many entries in <code class="language-plaintext highlighter-rouge">journalctl</code> is the logging of users running commands on a terminal, including the timestamp, what privilege and in which directory.</p>
 
 <p>Readings</p>
 <ul>
@@ -40,7 +117,7 @@
   <li><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/configuring_basic_system_settings/assembly_troubleshooting-problems-using-log-files_configuring-basic-system-settings">log files, syslog</a></li>
 </ul>
 
-<h1 id="shell-1">Shell</h1>
+<h1 id="shell-2">Shell</h1>
 <p>Commands following the <code class="language-plaintext highlighter-rouge">$</code> symbol is a shell prompt for a normal user.  Commands following the <code class="language-plaintext highlighter-rouge">#</code> symbol are run by a superuser.</p>
 
 <ul>
@@ -58,7 +135,7 @@
   <li><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/configuring_basic_system_settings/managing-system-services-with-systemctl_configuring-basic-system-settings">firewalld, systemctl</a></li>
 </ul>
 
-<h1 id="shell-2">Shell</h1>
+<h1 id="shell-3">Shell</h1>
 <p>Shell environment variables are declared with the following syntax: <code class="language-plaintext highlighter-rouge">KEYWORD="value"</code>, the shell variable uses capital letters, with no spaces between the equal operator and its surrounding operands.  To fetch the value of variable, use the dollar sign: <code class="language-plaintext highlighter-rouge">$KEYWORD</code>.</p>
 
 <p>Set up personal scripts to group tasks together.</p>
@@ -98,7 +175,7 @@ firefox <span class="nt">--new-tab</span> <span class="nt">-url</span> <span cla
         &amp;&gt;/dev/null &amp;
 </pre></td></tr></tbody></table></code></pre></div></div>
 
-<h1 id="shell-3">Shell</h1>
+<h1 id="shell-4">Shell</h1>
 <ul>
   <li><code class="language-plaintext highlighter-rouge">info coreutils</code> to open documentation on GNU utilities; more comprehensive than <code class="language-plaintext highlighter-rouge">man</code> for the topics discussed</li>
   <li><code class="language-plaintext highlighter-rouge">tldr [COMMAND]</code> outputs quick reference documentation on a command; useful for getting an initial understanding</li>
@@ -107,7 +184,7 @@ firefox <span class="nt">--new-tab</span> <span class="nt">-url</span> <span cla
   <li><code class="language-plaintext highlighter-rouge">man bash /REDIRECTION</code> and <code class="language-plaintext highlighter-rouge">man bash /Redirecting Standard Output and Standard Error</code> to learn more about <code class="language-plaintext highlighter-rouge">&amp;&gt;</code></li>
 </ul>
 
-<h1 id="shell-4">Shell</h1>
+<h1 id="shell-5">Shell</h1>
 <ul>
   <li><code class="language-plaintext highlighter-rouge">~/.bashrc</code> file</li>
   <li>Set up aliases:</li>
@@ -155,7 +232,7 @@ firefox <span class="nt">--new-tab</span> <span class="nt">-url</span> <span cla
 <h1 id="keyboard-input">Keyboard Input</h1>
 
 <ul>
-  <li>Settings &gt; Keyboard &gt; Input Sources &gt; + &gt; Greek.</li>
+  <li>Settings &gt; Keyboard &gt; Input Sources &gt; + &gt; Greek (polytonic).</li>
   <li><code class="language-plaintext highlighter-rouge">Super Key + Spacebar</code> to switch between inputs.</li>
 </ul>
 
