@@ -3,20 +3,51 @@ layout: default
 title: programming
 ---
 
+# Project management
+Essay topic: "production across an industry approaches the same end point in order to satisfy consumption" --- discuss how effective management results in an effective relation between production and consumption in the context of programming.
+
+Consumption necessitates production, just as production necessitates consumption.  One mode cannot exist without the other since a consumer can only consume what is produced, and a producer can only produce what is consumed.  Without a producer, the consumer consumes nothing.  Without a consumer, a producer produces for no one.  This proposition describes how a producer's endpoint, the produce (good or service), satisfies a consumer need.  Within this context, since the consumer qualifies the need, if the need is fulfilled, then it is possible to state that the production endpoints are the same.  Given that the endpoints are the same, the effectiveness of the relationship between the producer and the consumer, and the differentiation of the product is determined by management: the co-ordination of internal and external events to procure a targeted outcome.
+
+To manage production effectively, a worker must first perceive themselves as a manager.  Without this fundamental shift in perspective, the worker condemns themselves to counter-productivity: directionless pursuits are fruitless, demoralise, and are self-destructive.  The consequences of poor work happen in cascading sequence.  When the pursuit is directionless, the results are ineffective, generating a negative feedback loop, of which the result itself admonishes the poor work done.  In addition, since opportunity costs bisect decision-making into different paths, without a clear pursuit, the loss occurs doubly: the poor work done, and the possibility of good work not done.  The loss evident moreso when the produce does not lend itself to accomplishing further pursuits in the same direction, one brick at a time to build the cathedral.  This argument is not to say that every moment ought to be productive --- as there should always be room for rest, recreation and reflection (r4r^3) --- but when there are limited resources available (always), or a commitment has been made to achieve a target outcome, and the result is below the desired target range, then the management must be addressed.
+
+Once the worker understands the need for management, as the manager they must answer the questions which address their circumstance --- the circumstance under which an individual or team must operate: the who, what, when, where why and how questions.  Addressing the circumstance places constraints on the project, enabling thought and effort to converge into effective production.  The constraints prevent scope creep and provides a method for evaluating the success of the project.
+
+```js
+// who: self
+// what: creating a webpage with three tabs which switches contents, does this all through javascript
+// when: now
+// where:  ./src/index.js and ./dist/index.html
+// why: handle data sent between objects, manage scope, develop project with webpack running in background,
+// how:
+// menu page with menu object + food + beverage
+// food objects have: type, course, name, description, price
+// beverage objects have: type, style, name, description, price
+// home page with about blurb
+// contact page with form object, fields and addresse
+// json data file to generate food and beverage objects
+```
+
 # Object oriented programming
 ```js
 const Consumable = (obj = {}) => {
-  const name = obj['name'];
-  const description = obj['description'];
-  const price = obj['price'];
-  const { getCourse } = Food(obj);
-  const { getStyle } = Beverage(obj['style']);
+    const name = obj['name'];
+    const description = obj['description'];
+    const price = obj['price'];
+    const {getCourse} = Food(obj);
+    const {getStyle} = Beverage(obj['style']);
 
-  const getName = () => { return name }
-  const getDescription = () => { return description }
-  const getPrice = () => { return price}
-  
-  return { getName, getDescription, getPrice }
+    const getName = () => {
+        return name
+    }
+    const getDescription = () => {
+        return description
+    }
+    const getPrice = () => {
+        return price
+    }
+
+    return {getName, getDescription, getPrice}
+}
 ```
 
 Consumable was initially defined with positional parameters to create a Consumable object with properties, something like `const Consumable = (name, description, price) => {}`.  This architecture works with the expectation that the arguments received are always in the same order and format.  'Order' defined here in terms of parameter `a_1` being in argument position 1, parameter `a_2` being in argument position 2, parameter `a_3` being in argument position 3, stated: `a_1, a_2, a_3, ...a_n : 1, 2, 3, ...n`. 'Format' defined  in terms of the expectation the data type of `a_1, a_2, ...a_n` will always be the data type we expect of them.  This expectation of the 'same order and format' cannot be satisfied if there is a requirement for the program to be adapted and expanded to meet the changing needs of users: i.e. any software used in production with a strong user base.  Keywords in argument for better architecture: 'adapted and expanded', 'changing needs'.

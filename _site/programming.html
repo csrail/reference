@@ -25,7 +25,15 @@
   <a href="./glossa">γλώσσα</a>
 </nav>
 
-  <h1 id="object-oriented-programming">Object oriented programming</h1>
+  <h1 id="project-management">Project management</h1>
+<p>Essay topic: “production across an industry approaches the same end point in order to satisfy consumption” — discuss how effective management results in an effective relation between production and consumption in the context of programming.</p>
+
+<p>Consumption necessitates production, just as production necessitates consumption.  One mode cannot exist without the other since a consumer can only consume what is produced, and a producer can only produce what is consumed.  Without a producer, the consumer consumes nothing.  Without a consumer, a producer produces for no one.  This proposition describes how a producer’s endpoint, the produce (good or service), satisfies a consumer need.  Within this context, since the consumer qualifies the need, if the need is fulfilled, then it is possible to state that the production endpoints are the same.  Given that the endpoints are the same, the effectiveness of the relationship between the producer and the consumer, and the differentiation of the product is determined by management: the co-ordination of internal and external events to procure a targeted outcome.</p>
+
+<p>To manage production effectively, a worker must first perceive themselves as a manager.  Without this fundamental shift in perspective, the worker condemns themselves to counter-productivity: directionless pursuits are fruitless, demoralise, and are self-destructive.  The consequences of poor work happen in cascading sequence.  When the pursuit is directionless, the results are ineffective, generating a negative feedback loop, of which the result itself admonishes the poor work done.  In addition, since opportunity costs bisect decision-making into different paths, without a clear pursuit, the loss occurs doubly: the poor work done, and the possibility of good work not done.  The loss evident moreso when the produce does not lend itself to accomplishing further pursuits in the same direction, one brick at a time to build the cathedral.  This argument is not to say that every moment ought to be productive — as there should always be room for rest, recreation and reflection (r4r^3) — but when there are limited resources available (always), or a commitment has been made to achieve a target outcome, and the result is below the desired target range, then the management must be addressed.</p>
+
+<p>Once the worker understands the need for management, as the manager they must answer the questions which address their circumstance — the circumstance under which an individual or team must operate: the who, what, when, where why and how questions.  Addressing the circumstance places constraints on the project, enabling thought and effort to converge into effective production.  The constraints prevent scope creep and provides a method for evaluating the success of the project.</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
@@ -38,18 +46,59 @@
 10
 11
 12
-</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">Consumable</span> <span class="o">=</span> <span class="p">(</span><span class="nx">obj</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="kd">const</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">[</span><span class="dl">'</span><span class="s1">name</span><span class="dl">'</span><span class="p">];</span>
-  <span class="kd">const</span> <span class="nx">description</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">[</span><span class="dl">'</span><span class="s1">description</span><span class="dl">'</span><span class="p">];</span>
-  <span class="kd">const</span> <span class="nx">price</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">[</span><span class="dl">'</span><span class="s1">price</span><span class="dl">'</span><span class="p">];</span>
-  <span class="kd">const</span> <span class="p">{</span> <span class="nx">getCourse</span> <span class="p">}</span> <span class="o">=</span> <span class="nc">Food</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span>
-  <span class="kd">const</span> <span class="p">{</span> <span class="nx">getStyle</span> <span class="p">}</span> <span class="o">=</span> <span class="nc">Beverage</span><span class="p">(</span><span class="nx">obj</span><span class="p">[</span><span class="dl">'</span><span class="s1">style</span><span class="dl">'</span><span class="p">]);</span>
+</pre></td><td class="rouge-code"><pre><span class="c1">// who: self</span>
+<span class="c1">// what: creating a webpage with three tabs which switches contents, does this all through javascript</span>
+<span class="c1">// when: now</span>
+<span class="c1">// where:  ./src/index.js and ./dist/index.html</span>
+<span class="c1">// why: handle data sent between objects, manage scope, develop project with webpack running in background,</span>
+<span class="c1">// how:</span>
+<span class="c1">// menu page with menu object + food + beverage</span>
+<span class="c1">// food objects have: type, course, name, description, price</span>
+<span class="c1">// beverage objects have: type, style, name, description, price</span>
+<span class="c1">// home page with about blurb</span>
+<span class="c1">// contact page with form object, fields and addresse</span>
+<span class="c1">// json data file to generate food and beverage objects</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
-  <span class="kd">const</span> <span class="nx">getName</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">name</span> <span class="p">}</span>
-  <span class="kd">const</span> <span class="nx">getDescription</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">description</span> <span class="p">}</span>
-  <span class="kd">const</span> <span class="nx">getPrice</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">price</span><span class="p">}</span>
-  
-  <span class="k">return</span> <span class="p">{</span> <span class="nx">getName</span><span class="p">,</span> <span class="nx">getDescription</span><span class="p">,</span> <span class="nx">getPrice</span> <span class="p">}</span>
+<h1 id="object-oriented-programming">Object oriented programming</h1>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">Consumable</span> <span class="o">=</span> <span class="p">(</span><span class="nx">obj</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">[</span><span class="dl">'</span><span class="s1">name</span><span class="dl">'</span><span class="p">];</span>
+    <span class="kd">const</span> <span class="nx">description</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">[</span><span class="dl">'</span><span class="s1">description</span><span class="dl">'</span><span class="p">];</span>
+    <span class="kd">const</span> <span class="nx">price</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">[</span><span class="dl">'</span><span class="s1">price</span><span class="dl">'</span><span class="p">];</span>
+    <span class="kd">const</span> <span class="p">{</span><span class="nx">getCourse</span><span class="p">}</span> <span class="o">=</span> <span class="nc">Food</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="p">{</span><span class="nx">getStyle</span><span class="p">}</span> <span class="o">=</span> <span class="nc">Beverage</span><span class="p">(</span><span class="nx">obj</span><span class="p">[</span><span class="dl">'</span><span class="s1">style</span><span class="dl">'</span><span class="p">]);</span>
+
+    <span class="kd">const</span> <span class="nx">getName</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">name</span>
+    <span class="p">}</span>
+    <span class="kd">const</span> <span class="nx">getDescription</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">description</span>
+    <span class="p">}</span>
+    <span class="kd">const</span> <span class="nx">getPrice</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">price</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="nx">getName</span><span class="p">,</span> <span class="nx">getDescription</span><span class="p">,</span> <span class="nx">getPrice</span><span class="p">}</span>
+<span class="p">}</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>Consumable was initially defined with positional parameters to create a Consumable object with properties, something like <code class="language-plaintext highlighter-rouge">const Consumable = (name, description, price) =&gt; {}</code>.  This architecture works with the expectation that the arguments received are always in the same order and format.  ‘Order’ defined here in terms of parameter <code class="language-plaintext highlighter-rouge">a_1</code> being in argument position 1, parameter <code class="language-plaintext highlighter-rouge">a_2</code> being in argument position 2, parameter <code class="language-plaintext highlighter-rouge">a_3</code> being in argument position 3, stated: <code class="language-plaintext highlighter-rouge">a_1, a_2, a_3, ...a_n : 1, 2, 3, ...n</code>. ‘Format’ defined  in terms of the expectation the data type of <code class="language-plaintext highlighter-rouge">a_1, a_2, ...a_n</code> will always be the data type we expect of them.  This expectation of the ‘same order and format’ cannot be satisfied if there is a requirement for the program to be adapted and expanded to meet the changing needs of users: i.e. any software used in production with a strong user base.  Keywords in argument for better architecture: ‘adapted and expanded’, ‘changing needs’.</p>
