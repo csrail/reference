@@ -5,14 +5,15 @@ title: γλώσσα
 
 # Ελληνική αβ
 
-Αα | Alpha | Aa
-Ββ | Beta | Bb
-Γγ | Gamma | Gg
-Δδ | Delta | Dd
-Εε | Epsilon | Ee
-Ζζ | Zeta | Zz
-Ηη | Eta | Hh
-Θθ | Theta | Uu
+Αα | άλφα | Aa
+Ββ | βῆτα | Bb
+Γγ | γάμμα | Gg
+Δδ | δέλτα | Dd
+Εε | έψιλόν | Ee
+Ζζ | ζῆτα | Zz
+Ηη | ῆτα | Hh
+Θθ | θῆτα | Uu
+Ιι | 
 Κκ | Kappa | Kk
 Λλ | Lambda | Ll
 Μμ | Mu | Mm
