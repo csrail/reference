@@ -3,8 +3,10 @@ layout: default
 title: ide
 ---
 
-# npm, Webpack
+# emacs
 
+
+# npm, Webpack
 This post describes how to progressively move towards automating the build and reloading process used in a development environment.
 
 - Transcompiling javascript files from their original source as per the webpack.config.js file is done via the command `npx webpack --config webpack.config.js`.  The webpage is manually visited by opening the html file.
@@ -51,6 +53,13 @@ Readings:
 
 # Vim
 - `:help subsitute`
+- `:help range`
+
+- `:%s/displayMenu/buildMenu/g`
+- `%` means the entire file
+- `displayMenu` was the regex to match to
+- `buildMenu` was the string to replace the regex with
+- `g` means 'globally' --- but only within the given range
 
 - `ysiw'`, surround word with single quote marks.
 

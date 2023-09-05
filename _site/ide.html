@@ -25,8 +25,9 @@
   <a href="./glossa">γλώσσα</a>
 </nav>
 
-  <h1 id="npm-webpack">npm, Webpack</h1>
+  <h1 id="emacs">emacs</h1>
 
+<h1 id="npm-webpack">npm, Webpack</h1>
 <p>This post describes how to progressively move towards automating the build and reloading process used in a development environment.</p>
 
 <ul>
@@ -98,12 +99,18 @@
 
 <h1 id="vim">Vim</h1>
 <ul>
+  <li><code class="language-plaintext highlighter-rouge">:help subsitute</code></li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">:help subsitute</code></p>
+    <p><code class="language-plaintext highlighter-rouge">:help range</code></p>
   </li>
+  <li><code class="language-plaintext highlighter-rouge">:%s/displayMenu/buildMenu/g</code></li>
+  <li><code class="language-plaintext highlighter-rouge">%</code> means the entire file</li>
+  <li><code class="language-plaintext highlighter-rouge">displayMenu</code> was the regex to match to</li>
+  <li><code class="language-plaintext highlighter-rouge">buildMenu</code> was the string to replace the regex with</li>
   <li>
-    <p><code class="language-plaintext highlighter-rouge">ysiw'</code>, surround word with single quote marks.</p>
+    <p><code class="language-plaintext highlighter-rouge">g</code> means ‘globally’ — but only within the given range</p>
   </li>
+  <li><code class="language-plaintext highlighter-rouge">ysiw'</code>, surround word with single quote marks.</li>
 </ul>
 
 <h1 id="vim-1">Vim</h1>
